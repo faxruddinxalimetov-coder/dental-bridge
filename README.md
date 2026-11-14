@@ -4,8 +4,21 @@ Zubtexnik laboratoriyasi uchun platforma: zakazchik (shifokor, klinika), laborat
 
 - `index.html` — bosh sahifa
 - `app.html` — web ilova (ma'lumotlar brauzerda, `localStorage` → `dentbridge_v3`)
-- `kassa-import.js` — oylik kassa Excel fayllarini bazaga o'tkazuvchi modul
+- `kassa/` — klinika kassasi, Excel jadvali ko'rinishida (oylik varaq + kunlik varaqlar, formulalar)
+- `kassa-import.js` — oylik kassa Excel fayllarini bazaga o'tkazuvchi modul (ilova ham, kassa ham ishlatadi)
 - `dental-kopruk.html` — dental ko'prik haqida ma'lumot sahifasi
+
+## Kassa (`kassa/`)
+
+Klinikaning oylik kassa Excel faylidagi tuzilma va ranglar asosida qilingan (formula hisoblagichi Kassa-web namunasidan olingan):
+
+- **Kunlik varaq**: har bir doktor uchun naqd/plastik to'lovlar (bir katakka `150+200+80` — har biri alohida bemor), kasallar soni (to'lovlar soni, Excel'dagi `COUNT`), Topshirdi, Plan (doktor ulushi), Oldi (avans), Umumiy, Oladi, Qoldi, kreslo soni; xarajatlar; Bank, Zoir, kunlik foyda, boshqa kirimlar, kassa apparati, kassada hozirgi summa, olinmagan pul.
+- **Oylik varaq**: kunlar × doktorlar, jami ustunlar va «Topshirdi» qatori. Pastdagi yorliqlar Excel varaqlari kabi.
+- **Formulalar**: Excel kunlik varaqdagi katak manzillari bilan (`A46`, `S47`, `X46`, `C50`, `P50` ...), tahrirlash mumkin.
+- **Excel import**: eski oylik `.xlsx` fayllar, har bir bemor to'lovi bilan. Summalar ming so'mda.
+- CSV (Excel uchun), JSON zaxira. Ma'lumotlar faqat brauzerda (`localStorage` → `dentbridge-kassa-v1`).
+
+Plastik foyda kunlik varaqdagi `Z46 = C46 − H46` formulasi bo'yicha hisoblanadi. Excel'ning oylik varag'ida esa bu ustun `AK/2` deb olingan, shuning uchun ulushi 50% bo'lmagan doktorlar bor kunlarda ikki varaq farq qiladi.
 
 ## Rollar
 

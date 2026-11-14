@@ -4,7 +4,10 @@
 
    Natija:
    { people: [{n, pct}],
-     days: { 'YYYY-MM-DD': { in:[[ism,'n'|'p',som]], adv:[[ism,som]], exp:[[izoh,som]], bank:som, oth:[[izoh,'n'|'p',som]] } } } */
+     days: { 'YYYY-MM-DD': { in:[[ism,'n'|'p',som]], adv:[[ism,som]], exp:[[izoh,som]], bank:som, oth:[[izoh,'n'|'p',som]],
+                             lists:{ism:{n:[som...],p:[som...]}}, chair:{ism:son}, mach:[naqd,plastik] } } }
+   lists: har bir bemor to'lovi alohida (Excel'dagi 9..24 qatorlar), chair: kreslodagi bemorlar soni,
+   mach: kassa apparatiga kiritilgan summa. */
 (function (root) {
   const MONTHS = { yanvar: 1, fevral: 2, mart: 3, aprel: 4, may: 5, iyun: 6, iyul: 7, avgust: 8, sentabr: 9, sentyabr: 9, oktabr: 10, oktyabr: 10, noyabr: 11, dekabr: 12 };
   const K = 1000;
@@ -47,15 +50,30 @@
       if (/jami|bank|xarajat|zoir|foida|kirim|kassa/i.test(n)) break;
       people.push({ n, c, pct: planPct(rPlan && cell(c, rPlan)), pp: planPct(rPlan && cell(c + 1, rPlan)) });
     }
-    const day = { in: [], adv: [], exp: [], bank: 0, oth: [] };
+    // Kreslo (bemorlar soni) va kassa apparati qatorlari
+    let rChair = 0, rMach = 0;
+    for (let r = 40; r <= 160; r++) {
+      if (!rChair && /kreslo/i.test(str(1, r))) rChair = r + 3;
+      if (!rMach && /kassa aparatga kiritildi/i.test(str(0, r))) rMach = r;
+    }
+    const day = { in: [], adv: [], exp: [], bank: 0, oth: [], lists: {}, chair: {}, mach: [0, 0] };
     for (const p of people) {
       let n = 0, pl = 0;
-      for (let r = 9; r < rTop; r++) { n += num(p.c, r); pl += num(p.c + 1, r); }
+      const ln = [], lp = [];
+      for (let r = 9; r < rTop; r++) {
+        const a = num(p.c, r), b = num(p.c + 1, r);
+        n += a; pl += b;
+        if (a) ln.push(Math.round(a * K));
+        if (b) lp.push(Math.round(b * K));
+      }
+      if (ln.length || lp.length) day.lists[p.n] = { n: ln, p: lp };
+      if (rChair) { const ch = num(p.c, rChair); if (ch) day.chair[p.n] = ch; }
       if (n) day.in.push([p.n, 'n', Math.round(n * K)]);
       if (pl) day.in.push([p.n, 'p', Math.round(pl * K)]);
       if (rOldi && rUm) {
         let a = 0;
-        for (let r = rOldi; r < rUm; r++) { a += num(p.c, r) + num(p.c + 1, r); }
+        // "Oldi" sarlavha qatori hisobga kirmaydi: Excel'da umumiy = SUM(31..35)
+        for (let r = rOldi + 1; r < rUm; r++) { a += num(p.c, r) + num(p.c + 1, r); }
         if (a) day.adv.push([p.n, Math.round(a * K)]);
       }
     }
@@ -71,6 +89,7 @@
         day.exp.push([t.join(' ').replace(/\s+/g, ' ') || 'Xarajat', Math.round(s * K)]);
       }
     }
+    if (rMach) for (let c = 5; c < 34; c++) { day.mach[0] += Math.round(num(c, rMach) * K); day.mach[1] += Math.round(num(c, rMach + 1) * K); }
     // Bank va boshqa kirimlar: yorliq bo'yicha qidirish
     for (let r = 40; r <= 60; r++) for (let c = 0; c < 50; c++) {
       const s = str(c, r);

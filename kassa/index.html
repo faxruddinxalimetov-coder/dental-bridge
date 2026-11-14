@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#217346">
+  <title>Kassa — DentBridge</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="../kassa-import.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="xl-title">
+    <div class="xl-brand"><span class="xl-logo" aria-hidden="true">K</span><b>Kassa</b><span id="fileName" class="xl-file">—</span></div>
+    <div class="xl-save" id="saveState"><i></i> Brauzerda saqlanadi</div>
+  </header>
+  <nav class="xl-menu" aria-label="Bo'limlar">
+    <button class="xl-tab" data-view="monthly">Oylik</button>
+    <button class="xl-tab" data-view="daily">Kunlik</button>
+    <button class="xl-tab" data-view="formulas">Formulalar</button>
+    <button class="xl-tab" data-view="import">Excel import</button>
+    <button class="xl-tab" data-view="settings">Sozlamalar</button>
+    <a class="xl-tab xl-link" href="../index.html">DentBridge ›</a>
+  </nav>
+  <div class="xl-ribbon">
+    <label class="rb-field"><span>Hisob oyi</span><input id="monthPicker" type="month" aria-label="Hisob oyi"></label>
+    <div class="rb-group">
+      <button class="rb-btn" data-action="exportCsv">Excel uchun CSV</button>
+      <button class="rb-btn" data-action="exportJson">Zaxira nusxa</button>
+      <button class="rb-btn" data-action="importJson">Nusxani tiklash</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+      <input id="xlsxFile" type="file" accept=".xlsx,.xls" multiple hidden>
+    </div>
+    <div class="rb-hint">Summalar Excel'dagidek <b>ming so'mda</b>. Bir katakka bir nechta to'lov: <code>150+200+80</code></div>
+  </div>
+  <div class="xl-fx"><span class="fx-name" id="fxName">—</span><span class="fx-sign">fx</span><span class="fx-text" id="fxText"></span></div>
+
+  <main id="app" aria-live="polite"></main>
+
+  <footer class="xl-sheets" id="sheets" aria-label="Varaqlar"></footer>
+</body>
+</html>

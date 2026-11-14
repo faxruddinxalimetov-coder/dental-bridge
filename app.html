@@ -532,7 +532,7 @@ addstaff:()=>R(`${back('staff')}<div class="hd t"><h1>Yangi xodim</h1></div><div
 /* ---------- Ko'proq (rahbar) ---------- */
 more:()=>{const row=(t,x,go)=>`<a href="#" class="li" data-go="${go}"><span>${t}</span><span class="sub">${x} ›</span></a>`;
   return R(`<div class="hd"><div class="m">Rahbar</div><h1>Ko'proq</h1></div><div class="bd">
-  <div class="list">${row('Zakazchilar',kind('zak').length,'clients')}${row('Prays-list va ishbay narxlar',D.price.length+' ish turi','price')}${row('Hisobotlar',monName(S.month),'rep')}${row('Baza: Excel import, zaxira',Object.keys(D.days).length+' kun','db')}</div>
+  <div class="list">${row('Zakazchilar',kind('zak').length,'clients')}${row('Prays-list va ishbay narxlar',D.price.length+' ish turi','price')}${row('Hisobotlar',monName(S.month),'rep')}<a class="li" href="kassa/"><span>Klinika kassasi (Excel ko'rinishida)</span><span class="sub">ochish ›</span></a>${row('Baza: Excel import, zaxira',Object.keys(D.days).length+' kun','db')}</div>
   <div class="list">${row('Til',"O'zbekcha",'lang')}${row('Sozlamalar','','set')}</div></div>${nav()}`)},
 
 price:()=>R(`${back('more')}<div class="hd t"><h1>Prays-list</h1><div class="m">Narx va har bir kasb uchun ishbay haqi</div></div><div class="bd">${D.price.map(p=>`<div class="c" data-go="pedit" data-id="${p.id}"><div class="row"><b>${esc(p.n)}</b><b>${som(p.price)}</b></div><div class="sub">1 ${esc(p.unit)} · ${p.st.map(([k,r])=>`${esc(PSH[k])} ${fmt(r)}`).join(' → ')}</div></div>`).join('')}</div><div class="ft"><button class="b" data-act="padd">+ Ish turi qo'shish</button></div>`),
