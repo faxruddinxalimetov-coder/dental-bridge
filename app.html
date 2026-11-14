@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>DentBridge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<style>
+:root{--ink:#10242B;--mute:#4A6068;--line:#DCE6E3;--bd:#C5D3D0;--page:#E4EBE9;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;height:100%;background:var(--page);color:var(--ink);font:500 15px/1.45 'Manrope','Helvetica Neue',sans-serif}
+#app{position:relative;width:100%;max-width:430px;height:100%;margin:0 auto;overflow:hidden;background:#F3F6F5}
+@media (min-width:520px){body{display:grid;place-items:center}#app{width:390px;height:min(844px,100% - 24px);border-radius:28px;box-shadow:0 20px 60px rgba(16,36,43,.25)}}
+.scr{display:flex;flex-direction:column;height:100%}
+h1{margin:0;font-size:26px;font-weight:800}
+button,input,select,textarea{font:inherit;color:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+a{color:var(--nv);cursor:pointer}
+.hd{position:relative;padding:20px 16px 8px}.hd.t{padding:0 16px 8px}
+.hd .m{font-size:13px;font-weight:600;color:var(--mute)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.lng{position:absolute;top:14px;right:16px;min-height:44px;min-width:52px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:700;cursor:pointer}
+.bk{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font-weight:700;text-decoration:none;color:var(--ink)}
+.bd{flex:1;min-height:0;overflow:auto;padding:8px 16px;display:flex;flex-direction:column;gap:12px}
+.bd>*{flex:none}
+.ft{padding:12px 16px 24px;display:flex;flex-direction:column;gap:10px}
+.c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.b{width:100%;min-height:52px;border:0;border-radius:12px;color:#fff;background:var(--acc);font-weight:700;font-size:16px;cursor:pointer}
+.b.o{background:#fff;color:var(--ink);border:1px solid var(--bd)}
+.b.sm{min-height:44px;font-size:14px;flex:1}
+.i{width:100%;min-height:48px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--ink)}
+textarea.i{padding:10px 12px;resize:none}
+.l{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
+.s{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700}
+.s1{background:#DCEBFA;color:#12365F}.s2{background:#FBE9C8;color:#5E3704}.s3{background:#D3EFEA;color:#0B4B45}.s4{background:#E3E8EA;color:#2B3B41}
+.u{border:1px dashed #9DB5B0;border-radius:12px;padding:14px;color:var(--mute);text-align:center;font-weight:600;cursor:pointer;background:transparent;width:100%}
+.sub{color:var(--mute);font-size:13px}.m{color:var(--mute)}
+.col{display:flex;flex-direction:column;gap:6px}
+.fl{display:flex;gap:8px}.fl>*{flex:1}
+.fr{display:flex;justify-content:space-between;min-height:36px;align-items:center}
+nav{display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:12px}
+nav a{flex:1;display:flex;align-items:center;justify-content:center;min-height:56px;margin-top:-1px;border-top:3px solid transparent;font-size:12px;text-decoration:none;font-weight:600;color:var(--mute)}
+nav a.on{border-top-color:var(--nv);font-weight:800;color:var(--nv)}
+nav.ad a{min-height:52px;font-size:13px;border-top:0;margin:0}
+.rb{display:flex;align-items:center;gap:14px;width:100%;min-height:96px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer}
+.rb i{flex:0 0 48px;height:48px;border-radius:24px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;font-style:normal}
+.hero{position:relative;background:var(--acc);color:#fff;border-radius:20px;padding:20px;overflow:hidden}
+.hero .b{margin-top:14px;width:auto;min-height:46px;padding:0 20px;font-size:15px;background:#fff}
+.tile{min-height:76px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer}
+.ph{display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:13px;font-weight:700;color:#2B3B41}
+.steps{display:flex;gap:8px;padding:0 16px 8px}.steps div{flex:1;font-size:12px;font-weight:700;color:var(--mute)}
+.steps div.on{color:var(--ink)}.steps i{display:block;height:6px;border-radius:3px;background:var(--line);margin-bottom:4px}.steps .on i{background:var(--acc)}
+.chip{flex:none;padding:8px 14px;border-radius:99px;font-size:13px;font-weight:700;background:#fff;color:var(--ink);border:1px solid var(--bd);cursor:pointer}
+.chip.on{background:var(--nv);color:#fff;border-color:var(--nv)}
+.tabs{display:flex;gap:8px;padding:0 16px 8px}
+.tabs button{flex:1;min-height:44px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:700;cursor:pointer}
+.tabs button.on{background:var(--acc);color:#fff;border:0}
+.bub{max-width:78%;padding:10px 12px}
+.big{font-size:30px;font-weight:800;color:#4B2A78}
+.tg{position:absolute;left:12px;right:12px;bottom:84px;background:var(--ink);color:#fff;border-radius:12px;padding:12px 14px;font-weight:600;font-size:14px;text-align:center;z-index:9}
+.link{display:inline-flex;align-items:center;min-height:36px;font-size:14px;font-weight:700;text-decoration:none}
+.site{display:none}@media (min-width:520px){.site{display:block;position:fixed;top:16px;left:20px;font-weight:700;text-decoration:none;color:#10242B;min-height:44px;line-height:44px}}
+</style>
+</head>
+<body>
+<a class="site" href="index.html">‹ DentBridge sayti</a>
+<div id="app"></div>
+<input type="file" id="fp" hidden multiple>
+<script>
+const A={lab:'#0B6B62',mod:'#2456C9',adm:'#6B3FA0'},BG={lab:'#F3F6F5',mod:'#F1F4FB',adm:'#F5F1FA'},NV={lab:'#0B5E57',mod:'#1D44A3',adm:'#6B3FA0'};
+const ST={new:['Yangi','s1'],work:['Modelerda','s2'],review:['Tekshiruvda','s3'],done:['Qabul qilindi','s4']};
+const TYPES=['Toj',"Ko'prik",'Vinir','Implant'];
+const seed=()=>({lab:null,mod:null,lang:'uz',notif:true,next:1045,
+users:[{n:'Aziz',r:'Modeler',st:'ok',phone:'+998 90 123 45 67',exo:'3.2',exp:'4',w:['Toj','Implant'],test:'test_aziz.stl'},
+{n:'Dilnoza',r:'Modeler',st:'pending',phone:'+998 93 765 43 21',exo:'3.1',exp:'2',w:['Vinir'],test:'test_dilnoza.stl'},
+{n:'Smile Dental Lab',r:'Lab',st:'ok'}],
+orders:[
+{id:1042,type:"Ko'prik",teeth:'14, 15, 16',color:'A2',due:'2026-10-14',note:'Zirkoniy, 3 birlik.',lab:'Smile Dental Lab',files:[{n:'skan_1042.stl',s:2.4}],status:'review',modeler:'Aziz',mf:'bridge_1042.stl',mn:'Tishlov tekshirildi.',chat:[{w:'mod',t:`Model tayyor, tekshirib ko'ring.`}],seen:{lab:0,mod:1,adm:0}},
+{id:1043,type:'Toj',teeth:'11',color:'A1',due:'2026-10-16',note:'',lab:'Smile Dental Lab',files:[{n:'skan_1043.stl',s:1.8}],status:'work',modeler:'Aziz',chat:[],seen:{lab:0,mod:0,adm:0}},
+{id:1044,type:'Vinir',teeth:'11, 12, 21, 22',color:'B1',due:'2026-10-20',note:'Yupqa vinir.',lab:'Smile Dental Lab',files:[{n:'skan_1044.stl',s:3.1}],status:'new',chat:[],seen:{lab:0,mod:0,adm:0}},
+{id:1040,type:'Implant',teeth:'36',color:'A3',due:'2026-10-05',note:'',lab:'Smile Dental Lab',files:[{n:'skan_1040.stl',s:2.2}],status:'done',modeler:'Aziz',mf:'impl_1040.stl',chat:[],seen:{lab:0,mod:0,adm:0}}]});
+let D;try{D=JSON.parse(localStorage.getItem('dbw2'))}catch(e){}D=D||seed();
+const S={role:null,screen:'start',sel:null,flt:'new',pf:'Hammasi',draft:{},files:{},imp:0,rev:null};
+const save=()=>{try{localStorage.setItem('dbw2',JSON.stringify(D))}catch(e){}};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const mb=n=>(n/1048576).toFixed(1)+' MB';
+const me=()=>S.role==='lab'?(D.lab?.name||''):S.role==='mod'?(D.mod?.name||''):'Admin';
+const ord=()=>D.orders.find(o=>o.id===S.sel);
+const unread=(o,r)=>o.chat.slice(o.seen[r]).filter(m=>m.w!==r).length;
+const v=k=>esc(S.draft[k]??'');
+const I=(k,ph,t='text')=>`<input class="i" data-f="${k}" type="${t}" placeholder="${ph}" value="${v(k)}">`;
+const TA=(k,r=3)=>`<textarea class="i" data-f="${k}" rows="${r}">${v(k)}</textarea>`;
+const L=(t,x,st='')=>`<label class="l" style="${st}">${t}${x}</label>`;
+const badge=o=>`<span class="s ${ST[o.status][1]}">${ST[o.status][0]}</span>`;
+const kv=(a,b)=>`<div><span class="m">${a}:</span> <b>${esc(b)}</b></div>`;
+const back=t=>`<a class="bk" data-go="${t}">‹ Orqaga</a>`;
+const lng=`<button class="lng" data-go="lang" aria-label="Til">UZ</button>`;
+const files=(k)=>(S.files[k]||[]).length?`<div class="c" style="padding:6px 12px;font-size:14px">${S.files[k].map(f=>`<div class="fr"><span>${esc(f.n)}</span><span class="m">${mb(f.s)}</span></div>`).join('')}</div>`:'';
+const pickRow=(k,labels)=>`<div class="l">${labels[0]}<div class="fl">${labels[1].map(([t,a])=>`<button type="button" class="b o sm" data-pick="${k}" data-acc="${a}">${t}</button>`).join('')}</div></div>`;
+const NAV={lab:[['home','Bosh sahifa'],['orders','Zakazlar'],['port','Portfolyolar'],['set','Sozlamalar']],mod:[['home','Bosh sahifa'],['orders','Zakazlar'],['port','Portfolyom'],['set','Sozlamalar']],adm:[['orders','Zakazlar'],['admin','Foydalanuvchilar'],['lang','Til'],['admindb','Sozlamalar']]};
+const ACT={order:'orders',neworder:'orders',chat:'orders',adminreview:'admin',adminimport:'admindb',contact:'set'};
+const nav=()=>{const a=ACT[S.screen]||S.screen;return `<nav class="${S.role==='adm'?'ad':''}">${NAV[S.role].map(([k,t])=>`<a data-go="${k}" class="${a===k?'on':''}">${t}</a>`).join('')}</nav>`};
+const scr=(bg,ac,nv,h)=>{const a=$('#app');a.style.background=bg;a.style.setProperty('--acc',ac);a.style.setProperty('--nv',nv);return `<div class="scr">${h}</div>`};
+const R=(inner,bg)=>scr(bg||BG[S.role],A[S.role],NV[S.role],inner);
+const M=inner=>scr(BG.mod,A.mod,NV.mod,inner);
+const steps=n=>`<div class="steps">${['Anketa','Sinov keys','Tasdiqlash'].map((t,i)=>`<div class="${i<n?'on':''}"><i></i>${t}</div>`).join('')}</div>`;
+const tooth=`<svg width="96" height="96" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:12px;top:10px"><path d="M8 6c3-2 6 0 10 0s7-2 10 0c2 4-1 9-2 14s-1 10-4 10-2-7-4-7-1 7-4 7-3-5-4-10-4-10-2-14z"/></svg>`;
+const tiles=(arr,h)=>`<div style="display:flex;gap:10px">${arr.map((u,i)=>`<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><div class="ph" style="height:${h}px;background:${['#CFE6E1','#BFDDD6','#DDEFEB'][i%3]}">Rasm</div><div style="font-weight:700;font-size:13px">${esc(u.n)}</div><div class="sub" style="font-size:12px;margin-top:-4px">${esc(u.exo)} · ${esc(u.exp)} yil</div></div>`).join('')}</div>`;
+const appr=()=>D.users.filter(u=>u.r==='Modeler'&&u.st==='ok');
+const card=o=>`<div class="c" style="display:flex;justify-content:space-between;align-items:center"><div><b>№${o.id}</b><div class="sub">${esc(o.type)} · ${esc(o.teeth)}</div></div>${badge(o)}</div>`;
+
+const SC={
+start:()=>scr(BG.lab,'#10242B','#0B5E57',`<div class="hd">${lng.replace('data-go="lang"','data-toast="Til rolni tanlagandan keyin Sozlamalarda o\'zgaradi"')}<div class="m">DentBridge</div><h1>Xush kelibsiz</h1><div class="m">Rolingizni tanlang</div></div><div class="bd">
+${[['lab','L','Zakazberuvchi (dental lab)','Zakaz yarating, tayyor modelni qabul qiling'],['mod','M','Modeler (exocad)','Zakaz oling, model tayyorlang']].map(([k,l,t,d])=>`<button class="rb" data-act="role" data-k="${k}"><i style="background:${A[k]}">${l}</i><span><b style="display:block;font-size:17px">${t}</b><span class="m">${d}</span></span></button>`).join('')}
+<div class="sub">Modeler ro'yxatdan o'tgach, admin tasdiqlashi kerak.</div><a class="sub" data-act="role" data-k="adm" style="text-decoration:underline">Admin sifatida kirish (demo)</a></div>`),
+reglab:()=>scr(BG.lab,A.lab,NV.lab,`${back('start')}<div class="hd t"><h1>Lab ro'yxatdan o'tish</h1></div><div class="bd">${L('Laboratoriya nomi',I('l_name','Lab nomi'))}${L(`Mas'ul shaxs`,I('l_person','Ism Familiya'))}${L('Telefon',I('l_phone','+998 __ ___ __ __','tel'))}${L('Shahar',I('l_city','Shahar'))}<div class="c sub" style="font-size:14px">Ma'lumotlar saqlangach, darhol zakaz yaratishingiz mumkin. Admin tasdig'i kerak emas.</div></div><div class="ft"><button class="b" data-act="reglab">Ro'yxatdan o'tish</button></div>`),
+regmod:()=>M(`${back(D.mod?'regwait':'start')}<div class="hd t"><h1>Modeler anketasi</h1></div>${steps(1)}<div class="bd">${L('Ism',I('m_name','Ism Familiya'))}${L('Telefon',I('m_phone','+998 __ ___ __ __','tel'))}<div class="fl">${L('Exocad versiyasi',I('m_exo','3.x'))}${L('Tajriba (yil)',I('m_exp','0','number'))}</div>${pickRow('m',['Portfolio',[['Rasm','image/*'],['Video','video/*'],['Havola','']]])}${S.link?I('m_link','https://'):''}${files('m')}</div><div class="ft"><button class="b" data-act="regmod">Keyingi: sinov keys</button></div>`),
+regtest:()=>M(`${back('regmod')}<div class="hd t"><h1>Sinov keysi</h1></div>${steps(2)}<div class="bd"><div class="c col"><div class="row"><b>TEST-01</b><span class="s s1">Sinov</span></div><div>Toj · 11, 21</div><div class="sub">Muddat: 48 soat</div></div><button class="b o" data-toast="Demo: sinov skani serverda saqlanmaydi">Skanni yuklab olish</button><button class="u" data-pick="t" data-acc=".stl">${S.files.t?.[0]?esc(S.files.t[0].n):'Tayyor modelni yuklash [.stl]'}</button>${L('Izoh',TA('t_note'))}</div><div class="ft"><button class="b" data-act="regtest">Adminga yuborish</button></div>`),
+regwait:()=>{const m=D.mod,u=D.users.find(x=>x.n===m.name&&x.r==='Modeler'),st=u?.st||'pending';
+const t={pending:['s2','Kutilmoqda',"Admin ko'rib chiqmoqda",'Portfolio va sinov keysingiz tekshirilmoqda. Natija Telegram orqali yuboriladi.'],ok:['s3','Tasdiqlandi','Ariza tasdiqlandi','Endi zakazlarni qabul qilishingiz mumkin.'],rejected:['s4','Rad etildi','Ariza rad etildi',u?.note||'Anketani tahrirlab, qayta yuboring.'],blocked:['s4','Bloklangan','Akkaunt bloklangan',`Admin bilan bog'laning.`]}[st];
+return M(`<div class="hd t" style="padding-top:20px"><h1>Ariza yuborildi</h1></div>${steps(st==='pending'?3:3)}<div class="bd"><div class="c col" style="gap:8px"><span class="s ${t[0]}" style="align-self:flex-start">${t[1]}</span><b style="font-size:18px">${t[2]}</b><div class="m">${esc(t[3])}</div></div><div class="c" style="font-size:14px;display:flex;flex-direction:column;gap:4px">${[['Anketa','Yuborildi'],['Sinov keys','Yuborildi'],['Admin qarori',t[1]]].map(([a,b])=>`<div class="fr"><span>${a}</span><span class="m">${b}</span></div>`).join('')}</div></div><div class="ft">${st==='ok'?`<button class="b" data-go="home">Boshlash</button>`:`<button class="b o" data-act="editmod">Anketani tahrirlash</button>`}<a class="sub" data-act="logout" style="text-align:center">Chiqish</a></div>`)},
+home:()=>{const lab=S.role==='lab',os=D.orders,act=os.filter(o=>o.status!=='done').length;
+if(lab){const rv=os.filter(o=>o.status==='review'),last=rv[0]||os[0];
+return R(`<div class="hd row" style="padding-bottom:8px"><div><div class="m" style="font-size:13px;font-weight:600">Salom, ${esc(D.lab.person)}</div><h1 style="font-size:24px">${esc(D.lab.name)}</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd"><div class="hero">${tooth}<div style="font-size:13px;font-weight:600;color:#E6F0EE">Faol zakazlar</div><div style="font-size:44px;font-weight:800;line-height:1.1">${act}</div><div style="font-size:14px;color:#E6F0EE">Tekshirish kutayotgan: ${rv.length}</div><button class="b" style="color:#0B5E57" data-go="neworder">+ Yangi zakaz</button></div>
+<div class="fl" style="gap:12px"><button class="tile" data-go="orders"><b style="display:block;font-size:14px">Zakazlar</b><span class="m" style="font-size:12px">${os.filter(o=>o.status==='work').length} jarayonda</span></button><button class="tile" data-go="contact"><b style="display:block;font-size:14px">Admin bilan bog'lanish</b><span class="m" style="font-size:12px">Savol yoki muammo</span></button></div>
+<div class="row"><b style="font-size:17px">Portfolyolar</b><a class="link" data-go="port">Hammasi ›</a></div>${tiles(appr().slice(0,3),72)}${last?card(last).replace('<div class="c"','<div class="c" data-go="order" data-id="'+last.id+'"'):''}</div>${nav()}`)}
+const mine=os.filter(o=>o.modeler===me()),cur=mine.find(o=>o.status==='work'),nw=os.filter(o=>o.status==='new').length;
+return R(`<div class="hd row" style="padding-bottom:8px"><div><div class="m" style="font-size:13px;font-weight:600">Salom, ${esc(me())}</div><h1 style="font-size:24px">Modeler</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd"><div class="hero">${tooth}<div style="font-size:13px;font-weight:600;color:#E4EBFB">Yangi zakazlar</div><div style="font-size:44px;font-weight:800;line-height:1.1">${nw}</div><div style="font-size:14px;color:#E4EBFB">Jarayonda: ${mine.filter(o=>o.status==='work').length}</div><button class="b" style="color:#1D44A3" data-go="orders">Zakazlarni ko'rish</button></div>
+<div class="fl" style="gap:12px"><button class="tile" data-go="port"><b style="display:block;font-size:14px">Mening portfolyom</b><span class="m" style="font-size:12px">${(S.mfiles||[]).length} ta ish</span></button><button class="tile" data-go="contact"><b style="display:block;font-size:14px">Admin bilan bog'lanish</b><span class="m" style="font-size:12px">Savol yoki muammo</span></button></div>
+<div class="row"><b style="font-size:17px">Joriy ish</b><a class="link" data-go="orders">Ochish ›</a></div>${cur?`<div class="c row" data-go="order" data-id="${cur.id}"><div><b>№${cur.id}</b><div class="sub">${esc(cur.type)} · Muddat: ${esc(cur.due)}</div></div>${badge(cur)}</div>`:'<div class="c sub">Hozircha joriy ish yo\'q</div>'}
+<div class="row"><b style="font-size:17px">Mening portfolyom</b><a class="link" data-go="port">Boshqarish ›</a></div><div style="display:flex;gap:10px"><div class="ph" style="flex:1;height:72px;background:#D2DEF7">Rasm</div><div class="ph" style="flex:1;height:72px;background:#C3D3F3">Rasm</div><div class="ph" style="flex:1;height:72px;border:1px dashed #7F9AD8;color:#1D44A3">+ Qo'shish</div></div></div>${nav()}`)},
+orders:()=>{const r=S.role,os=D.orders;let list,hd;
+if(r==='lab'){hd=`<div class="m">Ish beruvchi · ${esc(D.lab.name)}</div>`;list=os.map(o=>`<div class="c" data-go="order" data-id="${o.id}" style="cursor:pointer;${o.status==='review'?'border:2px solid #0B6B62':''}"><div class="row"><b>№${o.id}</b>${badge(o)}</div><div style="margin-top:4px">${esc(o.type)} · ${esc(o.teeth)}</div>${o.status==='review'?'<div style="margin-top:4px;color:#0B5E57;font-weight:700">Tekshirish kerak</div>':o.status==='new'?'<div class="sub">Modeler kutilmoqda</div>':o.status==='work'?`<div class="sub">Muddat: ${esc(o.due)}</div>`:''}</div>`).join('')}
+else if(r==='mod'){hd=`<div class="m">Modeler · ${esc(me())}</div>`;const f=S.flt,L2=os.filter(o=>f==='new'?o.status==='new':f==='work'?o.status==='work'&&o.modeler===me():(o.status==='review'||o.status==='done')&&o.modeler===me());
+list=(L2.length?L2.map(o=>`<div class="c" data-go="order" data-id="${o.id}" style="cursor:pointer"><div class="row"><b>№${o.id}</b>${badge(o)}</div><div style="margin-top:4px">${esc(o.type)} · ${esc(o.teeth)}</div><div class="sub">Muddat: ${esc(o.due)} · Lab: ${esc(o.lab)}</div>${o.status==='new'?`<button class="b" style="margin-top:12px;min-height:48px" data-act="take" data-id="${o.id}">Qabul qilish</button>`:''}</div>`).join(''):'<div class="c sub" style="text-align:center">Zakaz yo\'q</div>')}
+else{hd='<div class="m">Admin</div>';list=os.map(o=>`<div class="c" data-go="order" data-id="${o.id}" style="cursor:pointer"><div class="row"><b>№${o.id}</b>${badge(o)}</div><div style="margin-top:4px">${esc(o.type)} · ${esc(o.teeth)}</div><div class="sub">Lab: ${esc(o.lab)}${o.modeler?' · Modeler: '+esc(o.modeler):''}</div></div>`).join('')}
+const tabs=r==='mod'?`<div class="tabs">${[['new','Yangi'],['work','Jarayonda'],['done','Topshirilgan']].map(([k,t])=>`<button class="${S.flt===k?'on':''}" data-act="flt" data-k="${k}">${t}</button>`).join('')}</div>`:'';
+return R(`<div class="hd">${lng}${hd}<h1>Zakazlar</h1></div>${tabs}<div class="bd">${list}</div>${r==='lab'?`<div class="ft" style="padding-bottom:12px"><button class="b" data-go="neworder">+ Yangi zakaz</button></div>`:''}${nav()}`)},
+neworder:()=>R(`${back('orders')}<div class="hd t"><h1>Yangi zakaz</h1></div><div class="bd">${L('Ish turi',`<select class="i" data-f="o_type">${TYPES.map(t=>`<option>${t}</option>`).join('')}</select>`)}${L('Tish raqamlari',I('o_teeth','11, 12'))}<div class="fl" style="gap:12px">${L('Rang',I('o_color','A2'),'flex:1')}${L('Muddat',I('o_due','','date'),'flex:1')}</div>${pickRow('o',['Fayllar',[['Rasm','image/*'],['Video','video/*'],['Fayl','']]])}${files('o')}${L('Izoh',TA('o_note'))}</div><div class="ft"><button class="b" data-act="create">Zakazni yuborish</button></div>`),
+order:()=>{const o=ord(),r=S.role,n=unread(o,r),ch=`<button class="b" style="background:#fff;color:${NV[r]};border:2px solid ${NV[r]}" data-go="chat">Chat${n?` · ${n} yangi`:''}</button>`;
+let rows,mid='',ft='';
+if(r==='lab'&&o.status==='review'){rows=kv('Modeler',o.modeler)+kv('Ish turi',`${o.type} · ${o.teeth}`)+kv('Fayl',o.mf)+`<div><span class="m">Izoh:</span> ${esc(o.mn||'—')}</div>`;
+mid=`<button class="b o" data-toast="Demo: fayl serverda saqlanmaydi">Modelni yuklab olish</button>${ch}${L(`Tuzatish sababi (kerak bo'lsa)`,TA('fx'))}`;
+ft=`<button class="b" data-act="accept">Qabul qilish</button><button class="b o" data-act="fix">Tuzatishga qaytarish</button>`}
+else{rows=kv('Ish turi',o.type)+kv('Tishlar',o.teeth)+kv('Rang',o.color)+kv('Muddat',o.due)+`<div><span class="m">Izoh:</span> ${esc(o.note||'—')}</div>`+(o.modeler&&r!=='mod'?kv('Modeler',o.modeler):'')+(r!=='lab'?kv('Lab',o.lab):'');
+mid=`${o.fix&&o.status==='work'?`<div class="c" style="border-color:#B42318"><b>Tuzatish sababi:</b> ${esc(o.fix)}</div>`:''}<button class="b o" data-toast="Demo: fayl serverda saqlanmaydi">Skanni yuklab olish</button>${o.status!=='new'||r!=='mod'?ch:''}`;
+if(r==='mod'&&o.status==='work'){mid+=`<button class="u" data-pick="w" data-acc=".stl">${S.files.w?.[0]?esc(S.files.w[0].n):`Exocad'da tayyorlangan modelni yuklash [.stl]`}</button>${L('Modeler izohi',TA('mn'))}`;ft=`<button class="b" data-act="submit">Tekshiruvga topshirish</button>`}
+if(r==='mod'&&o.status==='new')ft=`<button class="b" data-act="take" data-id="${o.id}">Qabul qilish</button>`}
+return R(`${back('orders')}<div class="hd t row"><h1>№${o.id}</h1>${badge(o)}</div><div class="bd"><div class="c col">${rows}</div>${mid}</div>${ft?`<div class="ft">${ft}</div>`:''}`)},
+chat:()=>{const o=ord(),r=S.role,nm={lab:'Lab',mod:'Modeler',adm:'Admin'};
+const msgs=o.chat.map(m=>m.w===r?`<div class="bub" style="align-self:flex-end;background:var(--acc);color:#fff;border-radius:14px 14px 4px 14px">${esc(m.t)}</div>`:`<div class="bub" style="align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px 14px 14px 4px"><div style="font-size:12px;font-weight:700" class="m">${nm[m.w]}</div>${esc(m.t)}</div>`).join('')||'<div class="sub" style="text-align:center">Xabar yo\'q</div>';
+return R(`${back('order')}<div class="hd t row"><h1 style="font-size:22px">Chat · №${o.id}</h1>${badge(o)}</div><div class="bd" id="msgs" style="gap:10px">${msgs}</div><div style="padding:10px 12px 20px;display:flex;gap:8px;align-items:center;background:#fff;border-top:1px solid var(--line)"><button aria-label="Biriktirish" data-pick="c" data-acc="" style="width:44px;height:44px;border:1px solid var(--bd);border-radius:22px;background:#fff;font-size:22px;font-weight:700;cursor:pointer">+</button><input class="i" id="cm" data-f="cm" placeholder="Xabar" aria-label="Xabar" style="flex:1;width:auto;min-width:0"><button aria-label="Yuborish" data-act="send" style="width:44px;height:44px;border:0;border-radius:22px;background:var(--acc);color:#fff;font-size:20px;font-weight:700;cursor:pointer">→</button></div>`)},
+port:()=>{const gr=()=>{const q=(S.draft.q||'').toLowerCase();return appr().filter(u=>(S.pf==='Hammasi'||(u.w||[]).includes(S.pf))&&u.n.toLowerCase().includes(q))};S.gr=gr;
+const g=gr(),rows=[];for(let i=0;i<g.length;i+=2)rows.push(tiles(g.slice(i,i+2),96));
+return R(`<div class="hd"><h1>Portfolyolar</h1><div class="m">Tasdiqlangan modelerlar ishlari</div></div><div class="bd"><label class="l"><span style="position:absolute;left:-9999px">Qidirish</span><input class="i" type="search" data-f="q" id="q" placeholder="Modeler qidirish" value="${v('q')}"></label><div style="display:flex;gap:8px;overflow:auto">${['Hammasi','Toj','Vinir','Implant'].map(t=>`<button class="chip ${S.pf===t?'on':''}" data-act="pf" data-k="${t}">${t}</button>`).join('')}</div><div id="grid" style="display:flex;flex-direction:column;gap:12px">${rows.join('')||'<div class="sub" style="text-align:center">Topilmadi</div>'}</div></div>${nav()}`)},
+set:()=>{const r=S.role,p=r==='lab'?D.lab:D.mod,row=(t,x,go)=>`<a data-go="${go}" style="display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-top:1px solid #E6EEEC;color:var(--ink);text-decoration:none;font-weight:600"><span>${t}</span><span class="m">${x}</span></a>`;
+return R(`<div class="hd"><h1>Sozlamalar</h1></div><div class="bd"><div class="c" style="display:flex;align-items:center;gap:14px"><span style="flex:0 0 52px;height:52px;border-radius:26px;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px">${r==='lab'?'L':r==='mod'?'M':'A'}</span><div><b>${esc(r==='lab'?p.person:me())}</b><div class="sub">${r==='lab'?esc(p.name):r==='mod'?'Modeler · Exocad '+esc(p.exo):'Administrator'}</div></div></div>
+<div class="c" style="padding:0;overflow:hidden">${row('Til',`O'zbekcha ›`,'lang').replace('border-top:1px solid #E6EEEC;','')}<label style="display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-top:1px solid #E6EEEC;font-weight:600">Bildirishnomalar<input type="checkbox" data-act="notif" ${D.notif?'checked':''} style="width:24px;height:24px;accent-color:var(--acc)"></label>${r!=='adm'?row(`Ma'lumotlarim`,'›','prof'):''}${row(`Admin bilan bog'lanish`,'›','contact')}</div>
+<a data-act="logout" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:14px;background:#fff;border:1px solid var(--line);color:#B42318;font-weight:700;text-decoration:none">Chiqish</a></div>${nav()}`)},
+lang:()=>R(`<div class="hd"><div class="m">Sozlamalar</div><h1>Til / Язык / Language</h1></div><div class="bd"><div class="c">${[['uz',`O'zbekcha`],['ru','Русский'],['en','English']].map(([k,t])=>`<label style="display:flex;align-items:center;gap:12px;min-height:48px;font-weight:600"><input type="radio" name="lang" value="${k}" ${D.lang===k?'checked':''} style="width:22px;height:22px;accent-color:var(--acc)">${t}</label>`).join('')}</div><div style="font-weight:800;font-size:17px;margin-top:8px">Rollar ranglari</div><div class="c">${[['lab','Ish beruvchi (lab)'],['mod','Modeler'],['adm','Admin']].map(([k,t])=>`<div style="display:flex;align-items:center;gap:12px;min-height:40px"><span style="width:24px;height:24px;border-radius:6px;background:${A[k]}"></span>${t}</div>`).join('')}</div></div><div style="padding:12px 16px 24px"><button class="b" data-act="savelang">Saqlash</button></div>`),
+contact:()=>R(`${back('set')}<div class="hd t"><h1>Admin bilan bog'lanish</h1><div class="m">Savol yoki muammo bo'lsa yozing</div></div><div class="bd"><div class="c">${[['Telegram','@dentbridge_admin'],['Telefon','+998 90 000 00 00'],['Ish vaqti','09:00–18:00']].map(([a,b])=>`<div class="row" style="min-height:40px"><span class="m">${a}</span><b>${b}</b></div>`).join('')}</div>${L('Mavzu',`<select class="i" data-f="c_topic"><option>Zakaz haqida</option><option>Ro'yxatdan o'tish</option><option>Boshqa</option></select>`)}${L('Xabar',TA('c_msg',4))}</div><div class="ft"><button class="b" data-act="contact">Adminga yuborish</button></div>`),
+admin:()=>{const us=D.users,over=D.orders.filter(o=>o.status!=='done'&&o.due<'2026-10-08').length;
+return R(`<div class="hd"><div class="m">Admin</div><h1>Boshqaruv</h1></div><div class="bd"><div style="display:flex;flex-wrap:wrap;gap:12px">${[['Zakazlar',D.orders.length],[`Muddati o'tgan`,over],['Modelerlar',us.filter(u=>u.r==='Modeler').length],['Laboratoriyalar',us.filter(u=>u.r==='Lab').length]].map(([t,n])=>`<div class="c" style="flex:1 1 150px"><div class="m" style="font-weight:600;font-size:13px">${t}</div><div class="big">${n}</div></div>`).join('')}</div><div style="font-weight:800;font-size:17px">Foydalanuvchilar</div>${us.map((u,i)=>`<div class="c row"><div ${u.r==='Modeler'?`data-go="adminreview" data-id="${i}" style="cursor:pointer"`:''}><b>${esc(u.n)}</b><div><span class="s ${u.r==='Lab'?'s3':'s1'}">${u.r}</span>${u.st!=='ok'?` <span class="s s2">${u.st==='pending'?'Kutilmoqda':u.st==='rejected'?'Rad etilgan':'Bloklangan'}</span>`:''}</div></div><button data-act="usr" data-id="${i}" style="min-height:44px;padding:0 14px;border-radius:10px;font-weight:700;cursor:pointer;${u.st==='ok'?'background:#fff;color:var(--ink);border:1px solid var(--bd)':'background:var(--acc);color:#fff;border:0'}">${u.st==='ok'?'Bloklash':'Tasdiqlash'}</button></div>`).join('')}</div>${nav()}`)},
+adminreview:()=>{const u=D.users[S.rev];return R(`${back('admin')}<div class="hd t"><h1>Modeler arizasi</h1><div class="m">${esc(u.n)}</div></div><div class="bd"><div class="c col" style="gap:4px">${kv('Telefon',u.phone||'—')}<div><span class="m">Exocad:</span> <b>${esc(u.exo)}</b> · <span class="m">Tajriba:</span> <b>${esc(u.exp)} yil</b></div></div><div style="font-weight:800">Portfolio</div><div class="fl">${['Rasm','Video','Rasm'].map(t=>`<div class="ph" style="height:80px;background:#D9CDE8;color:#3B2360">${t}</div>`).join('')}</div><div class="c row"><div><b>TEST-01</b><div class="sub">${esc(u.test||'model.stl')}</div></div><button class="b o" style="width:auto;min-height:44px;padding:0 14px;font-size:15px" data-toast="Demo: fayl serverda saqlanmaydi">Yuklab olish</button></div>${L('Izoh yoki rad etish sababi',TA('ar_note',2))}</div><div class="ft"><button class="b" data-act="approve">Tasdiqlash</button><button class="b o" data-act="reject">Rad etish</button></div>`)},
+admindb:()=>R(`<div class="hd"><div class="m">Admin</div><h1>Baza</h1></div><div class="bd"><div class="fl" style="gap:10px"><button class="b" style="flex:1" data-go="adminimport">Import</button><button class="b o" style="flex:1" data-toast="Demo: eksport o'chirilgan">Eksport</button></div>${[['Foydalanuvchilar',D.users.length,'admin'],['Zakazlar',D.orders.length,'orders'],['Portfolyolar',appr().length,'port']].map(([t,n,g])=>`<div class="c col" style="gap:10px"><div class="row" style="align-items:baseline"><b style="font-size:17px">${t}</b><span class="big" style="font-size:26px">${n}</span></div><div class="sub">Oxirgi yangilanish: 2026-10-08</div><div class="fl"><button class="b o sm" data-go="${g}">Ochish</button><button class="b o sm" data-toast="Demo: eksport o'chirilgan">Eksport</button></div></div>`).join('')}</div>${nav()}`),
+adminimport:()=>R(`${back('admindb')}<div class="hd t"><h1>Import</h1></div><div class="bd"><div class="fl">${['Foydalanuvchilar','Zakazlar','Portfolyo'].map((t,i)=>`<span data-act="imp" data-k="${i}" style="text-align:center;padding:11px 4px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;${S.imp===i?'background:#6B3FA0;color:#fff':'background:#fff;border:1px solid var(--bd)'}">${t}</span>`).join('')}</div><button class="u" style="border-color:#9D86C0" data-pick="i" data-acc=".csv,.xlsx,.json">${S.files.i?.[0]?esc(S.files.i[0].n):'Fayl tanlang [.csv .xlsx .json]'}</button><div class="c"><b>Ustunlarni moslash</b>${['Ism','Telefon','Rol'].map(t=>`<div class="row" style="min-height:44px"><b>${t}</b><select class="i" style="width:150px;min-height:40px" aria-label="${t}"><option>ustun</option></select></div>`).join('')}</div><div class="c row"><span><b>0</b> qo'shiladi · <b>0</b> xato</span><span class="s s2">Tekshiruv</span></div><label style="display:flex;align-items:center;gap:10px;min-height:44px;font-weight:600"><input type="checkbox" style="width:22px;height:22px;accent-color:#6B3FA0">Mavjud yozuvlarni yangilash</label></div><div class="ft"><button class="b" data-toast="Demo rejimida import ishlamaydi">Import qilish</button><button class="b o" data-toast="Demo: shablon yo'q">Shablonni yuklab olish</button></div>`)
+};
+
+function collect(){document.querySelectorAll('[data-f]').forEach(e=>S.draft[e.dataset.f]=e.type==='checkbox'?e.checked:e.value)}
+function render(){collect();$('#app').innerHTML=SC[S.screen]();
+ document.querySelectorAll('select[data-f]').forEach(e=>{if(S.draft[e.dataset.f]!=null)e.value=S.draft[e.dataset.f]});
+ const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight;}
+function go(s,id){collect();if(id!=null){if(s==='order')S.sel=+id;if(s==='adminreview')S.rev=+id}
+ if(s==='prof')s=S.role==='lab'?'reglab':'regmod';
+ if(s==='chat'){const o=ord();o.seen[S.role]=o.chat.length;save()}
+ if(s==='reglab'&&D.lab)Object.assign(S.draft,{l_name:D.lab.name,l_person:D.lab.person,l_phone:D.lab.phone,l_city:D.lab.city});
+ if(s==='regmod'&&D.mod)Object.assign(S.draft,{m_name:D.mod.name,m_phone:D.mod.phone,m_exo:D.mod.exo,m_exp:D.mod.exp});
+ S.screen=s;render()}
+function toast(t){const e=document.createElement('div');e.className='tg';e.textContent=t;$('#app').appendChild(e);setTimeout(()=>e.remove(),2400)}
+const need=(k,t)=>{if(!String(S.draft[k]||'').trim()){toast(t);return false}return true};
+function upsert(u){const i=D.users.findIndex(x=>x.n===u.n&&x.r===u.r);if(i<0)D.users.push(u);else Object.assign(D.users[i],u)}
+
+document.addEventListener('click',e=>{
+ const t=e.target.closest('[data-go],[data-act],[data-pick],[data-toast]');if(!t)return;
+ if(t.dataset.toast)return toast(t.dataset.toast);
+ if(t.dataset.pick){const f=$('#fp');f.dataset.k=t.dataset.pick;f.accept=t.dataset.acc||'';f.multiple=t.dataset.pick==='o'||t.dataset.pick==='m';
+  if(t.dataset.pick==='m'&&t.textContent==='Havola'){collect();S.link=true;return render()}
+  f.value='';return f.click()}
+ if(t.dataset.go)return go(t.dataset.go,t.dataset.id);
+ collect();const a=t.dataset.act,d=S.draft,o=S.sel?ord():null;
+ if(a==='role'){S.role=t.dataset.k;
+  if(S.role==='lab')return go(D.lab?'home':'reglab');
+  if(S.role==='mod')return go(D.mod?(D.users.find(u=>u.n===D.mod.name)?.st==='ok'?'home':'regwait'):'regmod');
+  return go('admin')}
+ if(a==='logout'){S.role=null;return go('start')}
+ if(a==='reglab'){if(!need('l_name','Laboratoriya nomini kiriting')||!need('l_person',`Mas'ul shaxsni kiriting`))return;
+  D.lab={name:d.l_name.trim(),person:d.l_person.trim(),phone:d.l_phone||'',city:d.l_city||''};upsert({n:D.lab.name,r:'Lab',st:'ok'});save();return go('home')}
+ if(a==='regmod'){if(!need('m_name','Ismni kiriting'))return;if(!need('m_exo','Exocad versiyasini kiriting'))return;return go('regtest')}
+ if(a==='regtest'){if(!S.files.t?.[0])return toast('Avval .stl modelni yuklang');
+  D.mod={name:d.m_name.trim(),phone:d.m_phone||'',exo:d.m_exo,exp:d.m_exp||'0'};
+  upsert({n:D.mod.name,r:'Modeler',st:'pending',phone:D.mod.phone,exo:D.mod.exo,exp:D.mod.exp,w:[],test:S.files.t[0].n,note:''});save();return go('regwait')}
+ if(a==='editmod')return go('regmod');
+ if(a==='flt'){S.flt=t.dataset.k;return render()}
+ if(a==='pf'){S.pf=t.dataset.k;return render()}
+ if(a==='imp'){S.imp=+t.dataset.k;return render()}
+ if(a==='take'){const x=D.orders.find(z=>z.id===+t.dataset.id);x.status='work';x.modeler=me();save();toast('Zakaz qabul qilindi');return go('order',x.id)}
+ if(a==='create'){if(!need('o_teeth','Tish raqamlarini kiriting')||!need('o_due','Muddatni tanlang'))return;
+  const n={id:D.next++,type:d.o_type||'Toj',teeth:d.o_teeth.trim(),color:d.o_color||'—',due:d.o_due,note:(d.o_note||'').trim(),lab:D.lab.name,files:S.files.o||[],status:'new',chat:[],seen:{lab:0,mod:0,adm:0}};
+  D.orders.unshift(n);['o_teeth','o_color','o_due','o_note','o_type'].forEach(k=>delete d[k]);S.files.o=[];save();return go('orders')}
+ if(a==='submit'){if(!S.files.w?.[0])return toast('Avval .stl modelni yuklang');o.mf=S.files.w[0].n;o.mn=(d.mn||'').trim();o.fix='';o.status='review';S.files.w=null;delete d.mn;save();toast('Tekshiruvga topshirildi');return go('orders')}
+ if(a==='accept'){o.status='done';save();toast('Zakaz qabul qilindi');return go('orders')}
+ if(a==='fix'){if(!need('fx','Tuzatish sababini yozing'))return;o.fix=d.fx.trim();o.status='work';delete d.fx;save();toast('Tuzatishga qaytarildi');return go('orders')}
+ if(a==='send'){const x=(d.cm||'').trim();if(!x)return;o.chat.push({w:S.role,t:x});o.seen[S.role]=o.chat.length;d.cm='';save();return render()}
+ if(a==='savelang'){const r=document.querySelector('input[name=lang]:checked');D.lang=r?r.value:'uz';save();toast(D.lang==='uz'?'Saqlandi':'Hozircha faqat oʻzbekcha interfeys mavjud');return go(S.role==='adm'?'admin':'set')}
+ if(a==='contact'){if(!need('c_msg','Xabar yozing'))return;d.c_msg='';toast('Adminga yuborildi');return go('set')}
+ if(a==='usr'){const u=D.users[+t.dataset.id];u.st=u.st==='ok'?'blocked':'ok';save();return render()}
+ if(a==='approve'||a==='reject'){const u=D.users[S.rev];u.st=a==='approve'?'ok':'rejected';u.note=d.ar_note||'';d.ar_note='';save();toast(a==='approve'?'Tasdiqlandi':'Rad etildi');return go('admin')}
+});
+document.addEventListener('change',e=>{
+ if(e.target.id==='fp'){const k=e.target.dataset.k,fs=[...e.target.files].map(f=>({n:f.name,s:f.size}));if(!fs.length)return;
+  collect();
+  if(k==='c'){const o=ord();o.chat.push({w:S.role,t:'Fayl: '+fs[0].n});o.seen[S.role]=o.chat.length;save()}
+  else if(k==='o'||k==='m')S.files[k]=[...(S.files[k]||[]),...fs];else S.files[k]=fs;
+  return render()}
+ if(e.target.dataset.act==='notif'){D.notif=e.target.checked;save()}
+});
+document.addEventListener('input',e=>{
+ if(e.target.id==='q'){S.draft.q=e.target.value;const g=S.gr(),rows=[];for(let i=0;i<g.length;i+=2)rows.push(tiles(g.slice(i,i+2),96));$('#grid').innerHTML=rows.join('')||'<div class="sub" style="text-align:center">Topilmadi</div>'}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='cm'){e.preventDefault();document.querySelector('[data-act=send]').click()}});
+render();
+</script>
+</body>
+</html>
