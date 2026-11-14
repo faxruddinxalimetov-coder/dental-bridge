@@ -8,229 +8,718 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
 <style>
-:root{--ink:#10242B;--mute:#4A6068;--line:#DCE6E3;--bd:#C5D3D0;--page:#E4EBE9;color-scheme:light;
+:root{--ink:#10242B;--mute:#4A6068;--line:#DCE6E3;--bd:#C5D3D0;--page:#E4EBE9;--red:#B42318;color-scheme:light;
 box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-html{height:100%;scroll-padding-top:env(safe-area-inset-top,0px)}
+html{height:100%}
 *{box-sizing:border-box}
 body{margin:0;height:100%;background:var(--page);color:var(--ink);font:500 15px/1.45 'Manrope','Helvetica Neue',sans-serif}
 #app{position:relative;width:100%;max-width:430px;height:100%;margin:0 auto;overflow:hidden;background:#F3F6F5}
-@media (min-width:520px){body{display:grid;place-items:center}#app{width:390px;height:min(844px,100% - 24px);border-radius:28px;box-shadow:0 20px 60px rgba(16,36,43,.25)}}
+@media (min-width:520px){body{display:grid;place-items:center}#app{width:400px;height:min(860px,100% - 24px);border-radius:28px;box-shadow:0 20px 60px rgba(16,36,43,.25)}}
 .scr{display:flex;flex-direction:column;height:100%}
-h1{margin:0;font-size:26px;font-weight:800}
+h1{margin:0;font-size:26px;font-weight:800;line-height:1.15}
+h2{margin:4px 0 0;font-size:17px;font-weight:800}
 button,input,select,textarea{font:inherit;color:inherit}
 button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 a{color:var(--nv);cursor:pointer}
 .hd{position:relative;padding:20px 16px 8px}.hd.t{padding:0 16px 8px}
-.hd .m{font-size:13px;font-weight:600;color:var(--mute)}
+.m{color:var(--mute)}.hd .m{font-size:13px;font-weight:600}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .lng{position:absolute;top:14px;right:16px;min-height:44px;min-width:52px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:700;cursor:pointer}
 .bk{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;font-weight:700;text-decoration:none;color:var(--ink)}
-.bd{flex:1;min-height:0;overflow:auto;padding:8px 16px;display:flex;flex-direction:column;gap:12px}
+.bd{flex:1;min-height:0;overflow:auto;padding:8px 16px 16px;display:flex;flex-direction:column;gap:12px}
 .bd>*{flex:none}
-.ft{padding:12px 16px 24px;display:flex;flex-direction:column;gap:10px}
+.ft{padding:12px 16px 20px;display:flex;flex-direction:column;gap:10px}
 .c{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.c[data-go]{cursor:pointer}
 .b{width:100%;min-height:52px;border:0;border-radius:12px;color:#fff;background:var(--acc);font-weight:700;font-size:16px;cursor:pointer}
 .b.o{background:#fff;color:var(--ink);border:1px solid var(--bd)}
 .b.sm{min-height:44px;font-size:14px;flex:1}
+.b.red{background:#fff;color:var(--red);border:1px solid #E7B4AE}
 .i{width:100%;min-height:48px;padding:0 12px;border:1px solid var(--bd);border-radius:10px;background:#fff;color:var(--ink)}
 textarea.i{padding:10px 12px;resize:none}
 .l{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:14px}
-.s{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700}
-.s1{background:#DCEBFA;color:#12365F}.s2{background:#FBE9C8;color:#5E3704}.s3{background:#D3EFEA;color:#0B4B45}.s4{background:#E3E8EA;color:#2B3B41}
+.s{display:inline-block;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;white-space:nowrap}
+.s1{background:#DCEBFA;color:#12365F}.s2{background:#FBE9C8;color:#5E3704}.s3{background:#D3EFEA;color:#0B4B45}.s4{background:#E3E8EA;color:#2B3B41}.s5{background:#FADCD8;color:#7A1A10}
 .u{border:1px dashed #9DB5B0;border-radius:12px;padding:14px;color:var(--mute);text-align:center;font-weight:600;cursor:pointer;background:transparent;width:100%}
-.sub{color:var(--mute);font-size:13px}.m{color:var(--mute)}
+.sub{color:var(--mute);font-size:13px}
 .col{display:flex;flex-direction:column;gap:6px}
-.fl{display:flex;gap:8px}.fl>*{flex:1}
-.fr{display:flex;justify-content:space-between;min-height:36px;align-items:center}
-nav{display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:12px}
-nav a{flex:1;display:flex;align-items:center;justify-content:center;min-height:56px;margin-top:-1px;border-top:3px solid transparent;font-size:12px;text-decoration:none;font-weight:600;color:var(--mute)}
+.fl{display:flex;gap:8px}.fl>*{flex:1;min-width:0}
+.fr{display:flex;justify-content:space-between;align-items:center;min-height:34px;gap:10px}
+nav{display:flex;background:#fff;border-top:1px solid var(--line);padding-bottom:10px}
+nav a{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;min-height:56px;margin-top:-1px;padding:0 2px;border-top:3px solid transparent;font-size:12px;line-height:1.2;text-decoration:none;font-weight:600;color:var(--mute)}
 nav a.on{border-top-color:var(--nv);font-weight:800;color:var(--nv)}
-nav.ad a{min-height:52px;font-size:13px;border-top:0;margin:0}
-.rb{display:flex;align-items:center;gap:14px;width:100%;min-height:96px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer}
-.rb i{flex:0 0 48px;height:48px;border-radius:24px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;font-style:normal}
+.rb{display:flex;align-items:center;gap:14px;width:100%;min-height:84px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer}
+.av{flex:0 0 46px;height:46px;border-radius:23px;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;font-style:normal;background:var(--acc)}
 .hero{position:relative;background:var(--acc);color:#fff;border-radius:20px;padding:20px;overflow:hidden}
-.hero .b{margin-top:14px;width:auto;min-height:46px;padding:0 20px;font-size:15px;background:#fff}
+.hero .b{margin-top:14px;width:auto;min-height:46px;padding:0 20px;font-size:15px;background:#fff;color:var(--nv)}
+.hero .k{font-size:13px;font-weight:600;opacity:.88}.hero .n{font-size:42px;font-weight:800;line-height:1.1}
 .tile{min-height:76px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff;text-align:left;cursor:pointer}
+.tile b{display:block;font-size:14px}.tile span{font-size:12px}
 .ph{display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:13px;font-weight:700;color:#2B3B41}
 .steps{display:flex;gap:8px;padding:0 16px 8px}.steps div{flex:1;font-size:12px;font-weight:700;color:var(--mute)}
 .steps div.on{color:var(--ink)}.steps i{display:block;height:6px;border-radius:3px;background:var(--line);margin-bottom:4px}.steps .on i{background:var(--acc)}
+.chips{display:flex;gap:8px;overflow:auto;padding-bottom:2px}
 .chip{flex:none;padding:8px 14px;border-radius:99px;font-size:13px;font-weight:700;background:#fff;color:var(--ink);border:1px solid var(--bd);cursor:pointer}
 .chip.on{background:var(--nv);color:#fff;border-color:var(--nv)}
 .tabs{display:flex;gap:8px;padding:0 16px 8px}
-.tabs button{flex:1;min-height:44px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:700;cursor:pointer}
-.tabs button.on{background:var(--acc);color:#fff;border:0}
-.bub{max-width:78%;padding:10px 12px}
-.big{font-size:30px;font-weight:800;color:#4B2A78}
+.tabs button{flex:1;min-height:44px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:700;font-size:14px;cursor:pointer}
+.tabs button.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.bub{max-width:80%;padding:10px 12px}
 .tg{position:absolute;left:12px;right:12px;bottom:84px;background:var(--ink);color:#fff;border-radius:12px;padding:12px 14px;font-weight:600;font-size:14px;text-align:center;z-index:9}
 .link{display:inline-flex;align-items:center;min-height:36px;font-size:14px;font-weight:700;text-decoration:none}
 .site{display:none}@media (min-width:520px){.site{display:block;position:fixed;top:16px;left:20px;font-weight:700;text-decoration:none;color:#10242B;min-height:44px;line-height:44px}}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:left}
+.kpi .m{font-size:12px;font-weight:600}.kpi b{display:block;font-size:19px;font-weight:800;margin-top:2px;word-break:break-word}
+.kpi[data-go]{cursor:pointer}
+.sec{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.sec b{font-size:17px;font-weight:800}
+.list{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.li{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:52px;padding:8px 14px;border-top:1px solid #E6EEEC;color:var(--ink);text-decoration:none;font-weight:600}
+.li:first-child{border-top:0}
+.li .sub{font-weight:500}
+.x{border:0;background:none;color:var(--red);font-weight:800;font-size:18px;min-width:40px;min-height:40px;cursor:pointer;border-radius:10px}
+.stg{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid #E6EEEC}
+.stg:first-child{border-top:0;padding-top:2px}
+.dot{width:14px;height:14px;border-radius:7px;margin-top:4px;flex:none;border:2px solid var(--bd);background:#fff}
+.dot.work{background:#E0A526;border-color:#E0A526}.dot.done{background:#0B8F7F;border-color:#0B8F7F}
+.tw{overflow:auto;border:1px solid var(--line);border-radius:14px;background:#fff}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th,.tbl td{padding:8px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid #E6EEEC}
+.tbl th{font-size:12px;color:var(--mute);font-weight:700;background:#FAFCFB}
+.tbl th:first-child,.tbl td:first-child{text-align:left;position:sticky;left:0;background:#fff}
+.tbl th:first-child{background:#FAFCFB}
+.tbl tr.tot td{font-weight:800;background:#F6F9F8}
+.tbl tr.tot td:first-child{background:#F6F9F8}
+.neg{color:var(--red)}
+.chk{display:flex;align-items:center;gap:10px;min-height:44px;font-weight:600}
+.chk input{width:22px;height:22px;accent-color:var(--acc)}
+.dn{display:flex;gap:8px;align-items:center}
+.dn button{flex:0 0 48px;min-height:48px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:800;font-size:18px;cursor:pointer}
 </style>
 </head>
 <body>
 <a class="site" href="index.html">‹ DentBridge sayti</a>
 <div id="app"></div>
 <input type="file" id="fp" hidden multiple>
+<input type="file" id="fx" hidden multiple accept=".xlsx,.xls">
+<input type="file" id="fj" hidden accept=".json,application/json">
+<script src="kassa-import.js"></script>
 <script>
-const A={lab:'#0B6B62',mod:'#2456C9',adm:'#6B3FA0'},BG={lab:'#F3F6F5',mod:'#F1F4FB',adm:'#F5F1FA'},NV={lab:'#0B5E57',mod:'#1D44A3',adm:'#6B3FA0'};
-const ST={new:['Yangi','s1'],work:['Modelerda','s2'],review:['Tekshiruvda','s3'],done:['Qabul qilindi','s4']};
-const TYPES=['Toj',"Ko'prik",'Vinir','Implant'];
-const seed=()=>({lab:null,mod:null,lang:'uz',notif:true,next:1045,
-users:[{n:'Aziz',r:'Modeler',st:'ok',phone:'+998 90 123 45 67',exo:'3.2',exp:'4',w:['Toj','Implant'],test:'test_aziz.stl'},
-{n:'Dilnoza',r:'Modeler',st:'pending',phone:'+998 93 765 43 21',exo:'3.1',exp:'2',w:['Vinir'],test:'test_dilnoza.stl'},
-{n:'Smile Dental Lab',r:'Lab',st:'ok'}],
-orders:[
-{id:1042,type:"Ko'prik",teeth:'14, 15, 16',color:'A2',due:'2026-10-14',note:'Zirkoniy, 3 birlik.',lab:'Smile Dental Lab',files:[{n:'skan_1042.stl',s:2.4}],status:'review',modeler:'Aziz',mf:'bridge_1042.stl',mn:'Tishlov tekshirildi.',chat:[{w:'mod',t:`Model tayyor, tekshirib ko'ring.`}],seen:{lab:0,mod:1,adm:0}},
-{id:1043,type:'Toj',teeth:'11',color:'A1',due:'2026-10-16',note:'',lab:'Smile Dental Lab',files:[{n:'skan_1043.stl',s:1.8}],status:'work',modeler:'Aziz',chat:[],seen:{lab:0,mod:0,adm:0}},
-{id:1044,type:'Vinir',teeth:'11, 12, 21, 22',color:'B1',due:'2026-10-20',note:'Yupqa vinir.',lab:'Smile Dental Lab',files:[{n:'skan_1044.stl',s:3.1}],status:'new',chat:[],seen:{lab:0,mod:0,adm:0}},
-{id:1040,type:'Implant',teeth:'36',color:'A3',due:'2026-10-05',note:'',lab:'Smile Dental Lab',files:[{n:'skan_1040.stl',s:2.2}],status:'done',modeler:'Aziz',mf:'impl_1040.stl',chat:[],seen:{lab:0,mod:0,adm:0}}]});
-let D;try{D=JSON.parse(localStorage.getItem('dbw2'))}catch(e){}D=D||seed();
-const S={role:null,screen:'start',sel:null,flt:'new',pf:'Hammasi',draft:{},files:{},imp:0,rev:null};
-const save=()=>{try{localStorage.setItem('dbw2',JSON.stringify(D))}catch(e){}};
-const $=s=>document.querySelector(s);
-const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const mb=n=>(n/1048576).toFixed(1)+' MB';
-const me=()=>S.role==='lab'?(D.lab?.name||''):S.role==='mod'?(D.mod?.name||''):'Admin';
-const ord=()=>D.orders.find(o=>o.id===S.sel);
-const unread=(o,r)=>o.chat.slice(o.seen[r]).filter(m=>m.w!==r).length;
-const v=k=>esc(S.draft[k]??'');
-const I=(k,ph,t='text')=>`<input class="i" data-f="${k}" type="${t}" placeholder="${ph}" value="${v(k)}">`;
-const TA=(k,r=3)=>`<textarea class="i" data-f="${k}" rows="${r}">${v(k)}</textarea>`;
-const L=(t,x,st='')=>`<label class="l" style="${st}">${t}${x}</label>`;
-const badge=o=>`<span class="s ${ST[o.status][1]}">${ST[o.status][0]}</span>`;
-const kv=(a,b)=>`<div><span class="m">${a}:</span> <b>${esc(b)}</b></div>`;
-const back=t=>`<a class="bk" data-go="${t}">‹ Orqaga</a>`;
-const lng=`<button class="lng" data-go="lang" aria-label="Til">UZ</button>`;
-const files=(k)=>(S.files[k]||[]).length?`<div class="c" style="padding:6px 12px;font-size:14px">${S.files[k].map(f=>`<div class="fr"><span>${esc(f.n)}</span><span class="m">${mb(f.s)}</span></div>`).join('')}</div>`:'';
-const pickRow=(k,labels)=>`<div class="l">${labels[0]}<div class="fl">${labels[1].map(([t,a])=>`<button type="button" class="b o sm" data-pick="${k}" data-acc="${a}">${t}</button>`).join('')}</div></div>`;
-const NAV={lab:[['home','Bosh sahifa'],['orders','Zakazlar'],['port','Portfolyolar'],['set','Sozlamalar']],mod:[['home','Bosh sahifa'],['orders','Zakazlar'],['port','Portfolyom'],['set','Sozlamalar']],adm:[['orders','Zakazlar'],['admin','Foydalanuvchilar'],['lang','Til'],['admindb','Sozlamalar']]};
-const ACT={order:'orders',neworder:'orders',chat:'orders',adminreview:'admin',adminimport:'admindb',contact:'set'};
-const nav=()=>{const a=ACT[S.screen]||S.screen;return `<nav class="${S.role==='adm'?'ad':''}">${NAV[S.role].map(([k,t])=>`<a data-go="${k}" class="${a===k?'on':''}">${t}</a>`).join('')}</nav>`};
-const scr=(bg,ac,nv,h)=>{const a=$('#app');a.style.background=bg;a.style.setProperty('--acc',ac);a.style.setProperty('--nv',nv);return `<div class="scr">${h}</div>`};
-const R=(inner,bg)=>scr(bg||BG[S.role],A[S.role],NV[S.role],inner);
-const M=inner=>scr(BG.mod,A.mod,NV.mod,inner);
-const steps=n=>`<div class="steps">${['Anketa','Sinov keys','Tasdiqlash'].map((t,i)=>`<div class="${i<n?'on':''}"><i></i>${t}</div>`).join('')}</div>`;
-const tooth=`<svg width="96" height="96" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:12px;top:10px"><path d="M8 6c3-2 6 0 10 0s7-2 10 0c2 4-1 9-2 14s-1 10-4 10-2-7-4-7-1 7-4 7-3-5-4-10-4-10-2-14z"/></svg>`;
-const tiles=(arr,h)=>`<div style="display:flex;gap:10px">${arr.map((u,i)=>`<div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:6px"><div class="ph" style="height:${h}px;background:${['#CFE6E1','#BFDDD6','#DDEFEB'][i%3]}">Rasm</div><div style="font-weight:700;font-size:13px">${esc(u.n)}</div><div class="sub" style="font-size:12px;margin-top:-4px">${esc(u.exo)} · ${esc(u.exp)} yil</div></div>`).join('')}</div>`;
-const appr=()=>D.users.filter(u=>u.r==='Modeler'&&u.st==='ok');
-const card=o=>`<div class="c" style="display:flex;justify-content:space-between;align-items:center"><div><b>№${o.id}</b><div class="sub">${esc(o.type)} · ${esc(o.teeth)}</div></div>${badge(o)}</div>`;
+/* ============ Konstantalar ============ */
+const KEY='dentbridge_v3';
+const A={zak:'#0B6B62',tex:'#2456C9',kas:'#8A5A12',adm:'#6B3FA0'};
+const BG={zak:'#F3F6F5',tex:'#F1F4FB',kas:'#F8F4EC',adm:'#F5F1FA'};
+const NV={zak:'#0B5E57',tex:'#1D44A3',kas:'#74490A',adm:'#5A3289'};
+const ROLE={zak:'Zakazchik',tex:'Texnik',kas:'Kassir',adm:'Rahbar'};
+// Zubtexnik laboratoriyasi kasblari: har bir naryad bosqichi shu kasblardan biriga tegishli
+const PROF={gips:'Gipschi (model)',cad:'CAD modeler (exocad)',cam:'CAM operator / frezerchi',kar:'Karkas texnigi',quy:'Quyuvchi (litey)',ker:'Keramist',imp:'Implant texnigi',pro:'Olinadigan protez texnigi',ort:'Ortodontik texnik',par:'Pardozchi (polirovka)',kur:'Kuryer'};
+const PSH={gips:'Gips model',cad:'CAD modellash',cam:'Frezerlash',kar:'Karkas',quy:'Quyish',ker:'Keramika',imp:'Implant qismi',pro:'Protez',ort:'Ortodontiya',par:'Pardoz',kur:'Yetkazish'};
+const OST={new:['Yangi','s1'],work:['Jarayonda','s2'],ready:['Tayyor','s3'],del:['Topshirildi','s4']};
+const USTAT={ok:['Faol','s3'],pending:['Kutilmoqda','s2'],rejected:['Rad etilgan','s5'],blocked:['Bloklangan','s5']};
 
+/* ============ Yordamchilar ============ */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=()=>{const d=new Date();d.setMinutes(d.getMinutes()-d.getTimezoneOffset());return d.toISOString().slice(0,10)};
+const addDays=(iso,n)=>{const d=new Date(iso+'T00:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)};
+const fmt=n=>Math.round(n||0).toLocaleString('ru-RU');
+const som=n=>fmt(n)+" so'm";
+const mb=n=>(n/1048576).toFixed(1)+' MB';
+const MON=['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
+const monName=ym=>{const [y,m]=ym.split('-');return MON[+m-1]+' '+y};
+const dayName=iso=>{const [y,m,d]=iso.split('-');return `${+d} ${MON[+m-1]} ${y}`};
+const teethCount=s=>(String(s||'').match(/\d+/g)||[]).length;
+let _rnd=7;const rnd=()=>(_rnd=(_rnd*16807)%2147483647)/2147483647;
+
+/* ============ Demo baza ============ */
+function seed(){
+  const t=today(),dd=n=>addDays(t,n);
+  const people=[
+    {id:1,kind:'adm',n:'Jasur Karimov',phone:'+998 90 111 22 33',st:'ok'},
+    {id:2,kind:'kas',n:'Malika',phone:'+998 91 222 33 44',st:'ok'},
+    {id:10,kind:'zak',sub:'Shifokor',n:'Dr. Akmal Rasulov',phone:'+998 90 123 00 01',city:'Urganch',pct:0,disc:0,st:'ok'},
+    {id:11,kind:'zak',sub:'Klinika',n:'"Tabassum" klinikasi',phone:'+998 62 224 00 02',city:'Xiva',pct:0,disc:5,st:'ok'},
+    {id:12,kind:'zak',sub:'Shifokor',n:'Dr. Nodira Yusupova',phone:'+998 93 555 00 03',city:'Urganch',pct:0,disc:0,st:'ok'},
+    {id:20,kind:'tex',prof:'cad',n:'Aziz',phone:'+998 90 123 45 67',exo:'3.2',exp:'4',st:'ok'},
+    {id:21,kind:'tex',prof:'cad',n:'Dilnoza',phone:'+998 93 765 43 21',exo:'3.1',exp:'2',st:'pending',test:'test_dilnoza.stl'},
+    {id:22,kind:'tex',prof:'gips',n:'Bekzod',phone:'+998 94 100 10 10',exp:'6',st:'ok'},
+    {id:23,kind:'tex',prof:'cam',n:'Sanjar',phone:'+998 94 100 10 11',exp:'3',st:'ok'},
+    {id:24,kind:'tex',prof:'kar',n:'Rustam',phone:'+998 94 100 10 12',exp:'8',st:'ok'},
+    {id:25,kind:'tex',prof:'quy',n:'Sherali',phone:'+998 94 100 10 13',exp:'10',st:'ok'},
+    {id:26,kind:'tex',prof:'ker',n:'Laylo',phone:'+998 94 100 10 14',exp:'5',st:'ok'},
+    {id:27,kind:'tex',prof:'pro',n:"Ulug'bek",phone:'+998 94 100 10 15',exp:'12',st:'ok'},
+    {id:28,kind:'tex',prof:'ort',n:'Kamola',phone:'+998 94 100 10 16',exp:'3',st:'ok'},
+    {id:29,kind:'tex',prof:'imp',n:'Otabek',phone:'+998 94 100 10 17',exp:'4',st:'ok'},
+    {id:30,kind:'tex',prof:'par',n:'Javohir',phone:'+998 94 100 10 18',exp:'2',st:'ok'},
+    {id:31,kind:'tex',prof:'kur',n:'Doniyor',phone:'+998 94 100 10 19',exp:'1',st:'ok'}
+  ];
+  const price=[
+    {id:1,n:'Zirkoniy toj',unit:'birlik',price:450000,st:[['gips',15000],['cad',35000],['cam',40000],['ker',60000]]},
+    {id:2,n:'Metallokeramika toj',unit:'birlik',price:300000,st:[['gips',15000],['kar',30000],['quy',20000],['ker',50000]]},
+    {id:3,n:'E.max vinir',unit:'birlik',price:500000,st:[['gips',15000],['cad',35000],['cam',40000],['ker',70000]]},
+    {id:4,n:'Implant ustidagi toj',unit:'birlik',price:650000,st:[['gips',20000],['imp',50000],['cad',40000],['cam',40000],['ker',60000]]},
+    {id:5,n:"Olinadigan protez (to'liq)",unit:"jag'",price:1500000,st:[['gips',30000],['pro',250000],['par',40000]]},
+    {id:6,n:'Ortodontik kappa',unit:"jag'",price:400000,st:[['gips',20000],['cad',30000],['ort',80000]]},
+    {id:7,n:'Faqat modellash (exocad)',unit:'birlik',price:100000,st:[['cad',35000]]}
+  ];
+  const staffBy=p=>people.find(x=>x.kind==='tex'&&x.prof===p&&x.st==='ok')?.id||null;
+  const mk=(id,zak,pr,teeth,color,due,patient,done,working,created,note)=>{
+    const P=price.find(x=>x.id===pr),units=teethCount(teeth)||1,disc=people.find(x=>x.id===zak).disc||0;
+    return {id,zak,pr,patient:patient.replace(/^Bemor:\s*/,''),teeth,units,color,due:dd(due),note:note||'',files:[{n:`skan_${id}.stl`,s:2400000}],created:dd(created),del:false,
+      sum:Math.round(units*P.price*(1-disc/100)),
+      stages:P.st.map(([p,rate],i)=>({p,rate,s:i<done||i===working?staffBy(p):null,st:i<done?'done':i===working?'work':'wait',at:i<done?dd(created+i+1):null})),
+      chat:[],seen:{}};
+  };
+  const orders=[
+    mk(1046,12,7,'46, 47','A2',2,'Bemor: Ra\'no S.',0,-1,0),
+    mk(1045,10,4,'36','A3',-2,'Bemor: Murod K.',2,2,-6,'Implant: Straumann BL 4.1'),
+    mk(1044,12,3,'11, 12, 21, 22','B1',8,'Bemor: Gulnora A.',0,-1,-1,'Yupqa vinir.'),
+    mk(1043,11,2,'11','A1',5,'Bemor: Shoxrux D.',1,1,-3),
+    mk(1042,10,1,'14, 15, 16','A2',3,'Bemor: Sardor T.',4,-1,-7,'Zirkoniy, 3 birlik.'),
+    mk(1040,11,5,"yuqori jag'",'A3',-5,'Bemor: Halima B.',3,-1,-14)
+  ];
+  const o1040=orders.find(o=>o.id===1040);o1040.units=1;o1040.sum=1425000;o1040.del=true;o1040.delAt=dd(-9);
+  orders.find(o=>o.id===1042).chat=[{w:'tex',n:'Aziz',t:"Model tayyor, tishlov tekshirildi."}];
+  // Kassa: so'nggi 20 kun. Avvalgi naryadlar topshirilib, to'langan
+  const days={},D0=()=>({in:[],adv:[],exp:[],bank:0,oth:[]});_rnd=7;
+  for(let i=19;i>=0;i--)days[dd(-i)]=D0();
+  const hist=[[1030,10,1,'21'],[1031,12,3,'12, 22'],[1032,11,2,'36, 37'],[1033,10,6,"yuqori jag'"],[1034,12,1,'45'],[1035,11,4,'46'],[1036,10,7,'14, 15, 16, 17'],[1037,12,2,'24, 25'],[1038,11,1,'11, 21'],[1039,10,3,'13']];
+  hist.forEach(([id,z,pr,teeth],k)=>{const created=-24+k*2,o=mk(id,z,pr,teeth,'A2',created+7,'',99,-1,created);o.stages.forEach((s,i)=>s.at=dd(Math.min(-1,created+i+1)));
+    o.del=true;o.delAt=dd(Math.min(-1,created+8));orders.push(o);
+    if(k<9&&days[o.delAt])days[o.delAt].in.push([z,rnd()<.6?'n':'p',o.sum,id])});
+  const exps=['Gips va material','Freza diski','Elektr energiya','Keramika massasi',"Terminal qog'ozi",'Yetkazish (taksi)','Internet'];
+  Object.keys(days).forEach((d,i)=>{const x=days[d];
+    if(rnd()<.6)x.exp.push([exps[Math.floor(rnd()*exps.length)],Math.round(rnd()*8+1)*25000]);
+    if(i%5===4)x.adv.push([[22,23,24,26][(i/5|0)%4],300000]);
+    if(i%7===6)x.bank=1000000;
+    if(i===8)x.oth.push(['Eski apparat sotildi','n',400000]);});
+  days[o1040.delAt].in.push([11,'p',1425000,1040]);
+  days[dd(-1)].in.push([10,'n',600000,1042]);
+  return {v:3,lab:{name:'Smile Dental Lab',city:'Urganch',phone:'+998 90 111 22 33'},notif:true,lang:'uz',kInK:true,next:1047,
+    people,price,orders,days,me:{},upd:t};
+}
+
+let D;try{D=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!D||D.v!==3)D=seed();
+const S={role:null,screen:'start',sel:null,pid:null,prid:null,flt:'all',pf:'all',draft:{},files:{},kdate:today(),kt:'in',month:today().slice(0,7),imp:null,ix:null,link:false};
+function save(){D.upd=today();try{localStorage.setItem(KEY,JSON.stringify(D));return true}catch(e){toast("Brauzer xotirasi to'ldi: saqlanmadi");return false}}
+
+/* ============ Model funksiyalari ============ */
+const P=id=>D.people.find(x=>x.id===id);
+const kind=k=>D.people.filter(x=>x.kind===k);
+const pname=id=>P(id)?.n||'—';
+const PR=id=>D.price.find(x=>x.id===id);
+const ord=()=>D.orders.find(o=>o.id===S.sel);
+const me=()=>S.role==='adm'?(kind('adm')[0]||{id:0,n:'Rahbar'}):P(D.me[S.role]);
+const newId=()=>Math.max(100,...D.people.map(x=>x.id))+1;
+const ostat=o=>o.del?'del':o.stages.every(s=>s.st==='done')?'ready':o.stages.some(s=>s.st!=='wait')?'work':'new';
+const avail=(o,i)=>!o.del&&o.stages[i].st==='wait'&&o.stages.slice(0,i).every(s=>s.st==='done');
+const curStage=o=>o.stages.find(s=>s.st!=='done');
+const overdue=o=>!o.del&&o.due<today();
+const unread=(o,r)=>o.chat.slice(o.seen[r]||0).filter(m=>m.w!==r).length;
+const day=d=>D.days[d]||(D.days[d]={in:[],adv:[],exp:[],bank:0,oth:[]});
+const pctOf=(pid,m)=>{const p=P(pid)||{};return m==='p'?(p.pp??p.pct??0):(p.pct??0)};
+// To'lovlar indeksi: har render oldidan bir marta quriladi
+function ix(){
+  if(S.ix)return S.ix;
+  const by={},byOrd={};
+  for(const d in D.days)for(const e of D.days[d].in){by[e[0]]=(by[e[0]]||0)+e[2];if(e[3])byOrd[e[3]]=(byOrd[e[3]]||0)+e[2]}
+  return S.ix={by,byOrd};
+}
+const billed=pid=>D.orders.filter(o=>o.zak===pid&&['ready','del'].includes(ostat(o))).reduce((a,o)=>a+o.sum,0);
+const debt=pid=>billed(pid)-(ix().by[pid]||0);
+// Kunlik hisob (Excel'dagi kunlik varaq formulalari bo'yicha)
+function calc(dates){
+  const r={N:0,P:0,PlN:0,PlP:0,A:0,X:0,B:0,ON:0,OP:0,per:{},days:0};
+  for(const d of dates){const x=D.days[d];if(!x)continue;r.days++;
+    for(const [pid,m,s] of x.in){const pl=s*pctOf(pid,m),q=r.per[pid]||(r.per[pid]={n:0,p:0,pl:0,a:0});
+      if(m==='n'){r.N+=s;r.PlN+=pl;q.n+=s}else{r.P+=s;r.PlP+=pl;q.p+=s}q.pl+=pl;}
+    for(const [pid,s] of x.adv){r.A+=s;(r.per[pid]||(r.per[pid]={n:0,p:0,pl:0,a:0})).a+=s}
+    for(const e of x.exp)r.X+=e[1];
+    r.B+=x.bank||0;
+    for(const [,m,s] of x.oth)m==='n'?r.ON+=s:r.OP+=s;
+  }
+  r.kassa=r.N-r.A-r.X+r.ON;            // Kassada hozirgi summa
+  r.zoir=r.N-r.A-r.B-r.X+r.ON;         // Egasiga (Zoir)
+  r.foida=r.zoir+r.B+(r.P+r.OP-r.PlP); // Jami foida: naqd + plastik
+  r.olin=r.PlN-r.A;                    // Olinmagan pul (ulush - avans)
+  return r;
+}
+const monthDates=ym=>Object.keys(D.days).filter(d=>d.startsWith(ym)).sort();
+// Texnik daromadi (ishbay): tugatilgan bosqichlar
+function earn(pid,ym){
+  const rows={};let sum=0,cnt=0;
+  for(const o of D.orders)for(const s of o.stages)if(s.s===pid&&s.st==='done'&&(s.at||'').startsWith(ym)){
+    const k=o.zak+'|'+s.rate,r=rows[k]||(rows[k]={zak:o.zak,units:0,rate:s.rate,sum:0});
+    r.units+=o.units;r.sum+=o.units*s.rate;sum+=o.units*s.rate;cnt++;
+  }
+  let paid=0;for(const d of monthDates(ym))for(const [p,s] of D.days[d].adv)if(p===pid)paid+=s;
+  return {rows:Object.values(rows),sum,cnt,paid};
+}
+
+/* ============ HTML bo'laklari ============ */
+const v=k=>esc(S.draft[k]??'');
+const I=(k,ph,t='text',x='')=>`<input class="i" data-f="${k}" type="${t}" placeholder="${esc(ph)}" value="${v(k)}" ${x}>`;
+const TA=(k,r=3,ph='')=>`<textarea class="i" data-f="${k}" rows="${r}" placeholder="${esc(ph)}">${v(k)}</textarea>`;
+const SEL=(k,opts,x='')=>`<select class="i" data-f="${k}" ${x}>${opts.map(([val,t])=>`<option value="${esc(val)}" ${String(S.draft[k]??'')===String(val)?'selected':''}>${esc(t)}</option>`).join('')}</select>`;
+const L=(t,x,st='')=>`<label class="l" style="${st}">${t}${x}</label>`;
+const badge=o=>{const s=ostat(o);return `<span class="s ${OST[s][1]}">${OST[s][0]}</span>`};
+const ubadge=u=>u.st&&u.st!=='ok'?` <span class="s ${USTAT[u.st][1]}">${USTAT[u.st][0]}</span>`:'';
+const kv=(a,b)=>`<div class="fr"><span class="m">${a}</span><b style="text-align:right">${b}</b></div>`;
+const back=t=>`<a class="bk" href="#" data-go="${t}">‹ Orqaga</a>`;
+const lng=`<button class="lng" data-go="lang" aria-label="Til">UZ</button>`;
+const ini=n=>esc(String(n||'?').replace(/^(Dr\.?\s*|")/i,'').charAt(0).toUpperCase());
+const files=k=>(S.files[k]||[]).length?`<div class="c" style="padding:6px 12px;font-size:14px">${S.files[k].map(f=>`<div class="fr"><span>${esc(f.n)}</span><span class="m">${mb(f.s)}</span></div>`).join('')}</div>`:'';
+const pickRow=(k,t,opts)=>`<div class="l">${t}<div class="fl">${opts.map(([x,a])=>`<button type="button" class="b o sm" data-pick="${k}" data-acc="${a}">${x}</button>`).join('')}</div></div>`;
+const NAV={
+  zak:[['home','Bosh sahifa'],['orders','Naryadlar'],['bill','Hisob'],['port','Texniklar'],['set','Sozlamalar']],
+  tex:[['home','Bosh sahifa'],['jobs','Ishlar'],['earn','Daromad'],['set','Sozlamalar']],
+  kas:[['kassa','Kassa'],['clients','Zakazchilar'],['rep','Hisobot'],['set','Sozlamalar']],
+  adm:[['home','Bosh'],['orders','Naryadlar'],['kassa','Kassa'],['staff','Xodimlar'],['more',"Ko'proq"]]
+};
+const ACT={order:'orders',neworder:'orders',chat:'orders',person:'staff',addstaff:'staff',kform:'kassa',client:'clients',addclient:'clients',contact:'set',prof:'set',
+  price:'more',pedit:'more',importx:'more',db:'more',lang:'more',clients:'clients',rep:'rep'};
+function nav(){
+  let a=ACT[S.screen]||S.screen;
+  if(S.role==='adm'&&['clients','rep','price','pedit','importx','db','client','addclient','lang','set'].includes(S.screen))a='more';
+  if(S.role==='adm'&&S.screen==='person'&&P(S.pid)?.kind==='zak')a='more';
+  return `<nav>${NAV[S.role].map(([k,t])=>`<a href="#" data-go="${k}" class="${a===k?'on':''}">${t}</a>`).join('')}</nav>`;
+}
+function scr(role,h){const a=$('#app'),r=role||'adm';a.style.background=BG[r];a.style.setProperty('--acc',A[r]);a.style.setProperty('--nv',NV[r]);return `<div class="scr">${h}</div>`}
+const R=h=>scr(S.role,h);
+const steps=(n,list)=>`<div class="steps">${list.map((t,i)=>`<div class="${i<n?'on':''}"><i></i>${t}</div>`).join('')}</div>`;
+const tooth=`<svg width="96" height="96" viewBox="0 0 36 36" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="position:absolute;right:12px;top:10px" aria-hidden="true"><path d="M8 6c3-2 6 0 10 0s7-2 10 0c2 4-1 9-2 14s-1 10-4 10-2-7-4-7-1 7-4 7-3-5-4-10-4-10-2-14z"/></svg>`;
+function ocard(o,extra=''){
+  const cs=curStage(o),pr=PR(o.pr);
+  return `<div class="c" data-go="order" data-id="${o.id}" style="${ostat(o)==='ready'&&S.role==='zak'?'border:2px solid var(--acc)':''}">
+  <div class="row"><b>№${o.id}</b>${badge(o)}</div>
+  <div style="margin-top:4px">${esc(pr?.n||'—')} · ${esc(o.teeth)}</div>
+  <div class="sub">${S.role!=='zak'?esc(pname(o.zak))+' · ':''}Muddat: <span class="${overdue(o)?'neg':''}">${esc(o.due)}</span>${cs&&!o.del?' · '+esc(PSH[cs.p]):''}</div>${extra}</div>`;
+}
+function ptile(u){return `<div class="c" style="display:flex;gap:12px;align-items:center"><span class="av" style="background:${A.tex}">${ini(u.n)}</span><div style="min-width:0"><b>${esc(u.n)}</b><div class="sub">${esc(PROF[u.prof]||'')}${u.exp?' · '+esc(u.exp)+' yil':''}${u.exo?' · Exocad '+esc(u.exo):''}</div></div></div>`}
+function table(head,rows,tot){
+  return `<div class="tw"><table class="tbl"><thead><tr>${head.map(h=>`<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}${tot?`<tr class="tot">${tot.map(c=>`<td>${c}</td>`).join('')}</tr>`:''}</tbody></table></div>`;
+}
+function sumCard(r,title){
+  const row=(a,b,cls='')=>`<div class="fr"><span class="m">${a}</span><b class="${cls}">${b}</b></div>`;
+  return `<div class="c col" style="gap:2px">${title?`<b style="margin-bottom:4px">${title}</b>`:''}
+  ${row('Jami topshirdi · naqd',som(r.N))}${row('Jami topshirdi · plastik',som(r.P))}
+  ${row('Ulush (plan)',som(r.PlN+r.PlP))}${row('Avans / oylik berildi',som(r.A))}
+  ${row('Xarajat',som(r.X))}${row('Bankka berildi',som(r.B))}
+  ${r.ON||r.OP?row('Boshqa kirimlar',som(r.ON+r.OP)):''}
+  <div style="border-top:1px solid var(--line);margin:6px 0"></div>
+  ${row('Kassada naqd',som(r.kassa),r.kassa<0?'neg':'')}${row('Egasiga (qoldiq)',som(r.zoir),r.zoir<0?'neg':'')}
+  ${row('Olinmagan ulush',som(r.olin),r.olin<0?'neg':'')}${row('Jami foyda',som(r.foida),r.foida<0?'neg':'')}</div>`;
+}
+const num=s=>{const x=parseFloat(String(s??'').replace(/\s/g,'').replace(',','.'));return isFinite(x)?x:0};
+const amount=k=>Math.round(num(S.draft[k])*(D.kInK?1000:1));
+const unitHint=()=>D.kInK?"ming so'm":"so'm";
+
+/* ============ Ekranlar ============ */
 const SC={
-start:()=>scr(BG.lab,'#10242B','#0B5E57',`<div class="hd">${lng.replace('data-go="lang"','data-toast="Til rolni tanlagandan keyin Sozlamalarda o\'zgaradi"')}<div class="m">DentBridge</div><h1>Xush kelibsiz</h1><div class="m">Rolingizni tanlang</div></div><div class="bd">
-${[['lab','L','Zakazberuvchi (dental lab)','Zakaz yarating, tayyor modelni qabul qiling'],['mod','M','Modeler (exocad)','Zakaz oling, model tayyorlang']].map(([k,l,t,d])=>`<button class="rb" data-act="role" data-k="${k}"><i style="background:${A[k]}">${l}</i><span><b style="display:block;font-size:17px">${t}</b><span class="m">${d}</span></span></button>`).join('')}
-<div class="sub">Modeler ro'yxatdan o'tgach, admin tasdiqlashi kerak.</div><a class="sub" data-act="role" data-k="adm" style="text-decoration:underline">Admin sifatida kirish (demo)</a></div>`),
-reglab:()=>scr(BG.lab,A.lab,NV.lab,`${back('start')}<div class="hd t"><h1>Lab ro'yxatdan o'tish</h1></div><div class="bd">${L('Laboratoriya nomi',I('l_name','Lab nomi'))}${L(`Mas'ul shaxs`,I('l_person','Ism Familiya'))}${L('Telefon',I('l_phone','+998 __ ___ __ __','tel'))}${L('Shahar',I('l_city','Shahar'))}<div class="c sub" style="font-size:14px">Ma'lumotlar saqlangach, darhol zakaz yaratishingiz mumkin. Admin tasdig'i kerak emas.</div></div><div class="ft"><button class="b" data-act="reglab">Ro'yxatdan o'tish</button></div>`),
-regmod:()=>M(`${back(D.mod?'regwait':'start')}<div class="hd t"><h1>Modeler anketasi</h1></div>${steps(1)}<div class="bd">${L('Ism',I('m_name','Ism Familiya'))}${L('Telefon',I('m_phone','+998 __ ___ __ __','tel'))}<div class="fl">${L('Exocad versiyasi',I('m_exo','3.x'))}${L('Tajriba (yil)',I('m_exp','0','number'))}</div>${pickRow('m',['Portfolio',[['Rasm','image/*'],['Video','video/*'],['Havola','']]])}${S.link?I('m_link','https://'):''}${files('m')}</div><div class="ft"><button class="b" data-act="regmod">Keyingi: sinov keys</button></div>`),
-regtest:()=>M(`${back('regmod')}<div class="hd t"><h1>Sinov keysi</h1></div>${steps(2)}<div class="bd"><div class="c col"><div class="row"><b>TEST-01</b><span class="s s1">Sinov</span></div><div>Toj · 11, 21</div><div class="sub">Muddat: 48 soat</div></div><button class="b o" data-toast="Demo: sinov skani serverda saqlanmaydi">Skanni yuklab olish</button><button class="u" data-pick="t" data-acc=".stl">${S.files.t?.[0]?esc(S.files.t[0].n):'Tayyor modelni yuklash [.stl]'}</button>${L('Izoh',TA('t_note'))}</div><div class="ft"><button class="b" data-act="regtest">Adminga yuborish</button></div>`),
-regwait:()=>{const m=D.mod,u=D.users.find(x=>x.n===m.name&&x.r==='Modeler'),st=u?.st||'pending';
-const t={pending:['s2','Kutilmoqda',"Admin ko'rib chiqmoqda",'Portfolio va sinov keysingiz tekshirilmoqda. Natija Telegram orqali yuboriladi.'],ok:['s3','Tasdiqlandi','Ariza tasdiqlandi','Endi zakazlarni qabul qilishingiz mumkin.'],rejected:['s4','Rad etildi','Ariza rad etildi',u?.note||'Anketani tahrirlab, qayta yuboring.'],blocked:['s4','Bloklangan','Akkaunt bloklangan',`Admin bilan bog'laning.`]}[st];
-return M(`<div class="hd t" style="padding-top:20px"><h1>Ariza yuborildi</h1></div>${steps(st==='pending'?3:3)}<div class="bd"><div class="c col" style="gap:8px"><span class="s ${t[0]}" style="align-self:flex-start">${t[1]}</span><b style="font-size:18px">${t[2]}</b><div class="m">${esc(t[3])}</div></div><div class="c" style="font-size:14px;display:flex;flex-direction:column;gap:4px">${[['Anketa','Yuborildi'],['Sinov keys','Yuborildi'],['Admin qarori',t[1]]].map(([a,b])=>`<div class="fr"><span>${a}</span><span class="m">${b}</span></div>`).join('')}</div></div><div class="ft">${st==='ok'?`<button class="b" data-go="home">Boshlash</button>`:`<button class="b o" data-act="editmod">Anketani tahrirlash</button>`}<a class="sub" data-act="logout" style="text-align:center">Chiqish</a></div>`)},
-home:()=>{const lab=S.role==='lab',os=D.orders,act=os.filter(o=>o.status!=='done').length;
-if(lab){const rv=os.filter(o=>o.status==='review'),last=rv[0]||os[0];
-return R(`<div class="hd row" style="padding-bottom:8px"><div><div class="m" style="font-size:13px;font-weight:600">Salom, ${esc(D.lab.person)}</div><h1 style="font-size:24px">${esc(D.lab.name)}</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd"><div class="hero">${tooth}<div style="font-size:13px;font-weight:600;color:#E6F0EE">Faol zakazlar</div><div style="font-size:44px;font-weight:800;line-height:1.1">${act}</div><div style="font-size:14px;color:#E6F0EE">Tekshirish kutayotgan: ${rv.length}</div><button class="b" style="color:#0B5E57" data-go="neworder">+ Yangi zakaz</button></div>
-<div class="fl" style="gap:12px"><button class="tile" data-go="orders"><b style="display:block;font-size:14px">Zakazlar</b><span class="m" style="font-size:12px">${os.filter(o=>o.status==='work').length} jarayonda</span></button><button class="tile" data-go="contact"><b style="display:block;font-size:14px">Admin bilan bog'lanish</b><span class="m" style="font-size:12px">Savol yoki muammo</span></button></div>
-<div class="row"><b style="font-size:17px">Portfolyolar</b><a class="link" data-go="port">Hammasi ›</a></div>${tiles(appr().slice(0,3),72)}${last?card(last).replace('<div class="c"','<div class="c" data-go="order" data-id="'+last.id+'"'):''}</div>${nav()}`)}
-const mine=os.filter(o=>o.modeler===me()),cur=mine.find(o=>o.status==='work'),nw=os.filter(o=>o.status==='new').length;
-return R(`<div class="hd row" style="padding-bottom:8px"><div><div class="m" style="font-size:13px;font-weight:600">Salom, ${esc(me())}</div><h1 style="font-size:24px">Modeler</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd"><div class="hero">${tooth}<div style="font-size:13px;font-weight:600;color:#E4EBFB">Yangi zakazlar</div><div style="font-size:44px;font-weight:800;line-height:1.1">${nw}</div><div style="font-size:14px;color:#E4EBFB">Jarayonda: ${mine.filter(o=>o.status==='work').length}</div><button class="b" style="color:#1D44A3" data-go="orders">Zakazlarni ko'rish</button></div>
-<div class="fl" style="gap:12px"><button class="tile" data-go="port"><b style="display:block;font-size:14px">Mening portfolyom</b><span class="m" style="font-size:12px">${(S.mfiles||[]).length} ta ish</span></button><button class="tile" data-go="contact"><b style="display:block;font-size:14px">Admin bilan bog'lanish</b><span class="m" style="font-size:12px">Savol yoki muammo</span></button></div>
-<div class="row"><b style="font-size:17px">Joriy ish</b><a class="link" data-go="orders">Ochish ›</a></div>${cur?`<div class="c row" data-go="order" data-id="${cur.id}"><div><b>№${cur.id}</b><div class="sub">${esc(cur.type)} · Muddat: ${esc(cur.due)}</div></div>${badge(cur)}</div>`:'<div class="c sub">Hozircha joriy ish yo\'q</div>'}
-<div class="row"><b style="font-size:17px">Mening portfolyom</b><a class="link" data-go="port">Boshqarish ›</a></div><div style="display:flex;gap:10px"><div class="ph" style="flex:1;height:72px;background:#D2DEF7">Rasm</div><div class="ph" style="flex:1;height:72px;background:#C3D3F3">Rasm</div><div class="ph" style="flex:1;height:72px;border:1px dashed #7F9AD8;color:#1D44A3">+ Qo'shish</div></div></div>${nav()}`)},
-orders:()=>{const r=S.role,os=D.orders;let list,hd;
-if(r==='lab'){hd=`<div class="m">Ish beruvchi · ${esc(D.lab.name)}</div>`;list=os.map(o=>`<div class="c" data-go="order" data-id="${o.id}" style="cursor:pointer;${o.status==='review'?'border:2px solid #0B6B62':''}"><div class="row"><b>№${o.id}</b>${badge(o)}</div><div style="margin-top:4px">${esc(o.type)} · ${esc(o.teeth)}</div>${o.status==='review'?'<div style="margin-top:4px;color:#0B5E57;font-weight:700">Tekshirish kerak</div>':o.status==='new'?'<div class="sub">Modeler kutilmoqda</div>':o.status==='work'?`<div class="sub">Muddat: ${esc(o.due)}</div>`:''}</div>`).join('')}
-else if(r==='mod'){hd=`<div class="m">Modeler · ${esc(me())}</div>`;const f=S.flt,L2=os.filter(o=>f==='new'?o.status==='new':f==='work'?o.status==='work'&&o.modeler===me():(o.status==='review'||o.status==='done')&&o.modeler===me());
-list=(L2.length?L2.map(o=>`<div class="c" data-go="order" data-id="${o.id}" style="cursor:pointer"><div class="row"><b>№${o.id}</b>${badge(o)}</div><div style="margin-top:4px">${esc(o.type)} · ${esc(o.teeth)}</div><div class="sub">Muddat: ${esc(o.due)} · Lab: ${esc(o.lab)}</div>${o.status==='new'?`<button class="b" style="margin-top:12px;min-height:48px" data-act="take" data-id="${o.id}">Qabul qilish</button>`:''}</div>`).join(''):'<div class="c sub" style="text-align:center">Zakaz yo\'q</div>')}
-else{hd='<div class="m">Admin</div>';list=os.map(o=>`<div class="c" data-go="order" data-id="${o.id}" style="cursor:pointer"><div class="row"><b>№${o.id}</b>${badge(o)}</div><div style="margin-top:4px">${esc(o.type)} · ${esc(o.teeth)}</div><div class="sub">Lab: ${esc(o.lab)}${o.modeler?' · Modeler: '+esc(o.modeler):''}</div></div>`).join('')}
-const tabs=r==='mod'?`<div class="tabs">${[['new','Yangi'],['work','Jarayonda'],['done','Topshirilgan']].map(([k,t])=>`<button class="${S.flt===k?'on':''}" data-act="flt" data-k="${k}">${t}</button>`).join('')}</div>`:'';
-return R(`<div class="hd">${lng}${hd}<h1>Zakazlar</h1></div>${tabs}<div class="bd">${list}</div>${r==='lab'?`<div class="ft" style="padding-bottom:12px"><button class="b" data-go="neworder">+ Yangi zakaz</button></div>`:''}${nav()}`)},
-neworder:()=>R(`${back('orders')}<div class="hd t"><h1>Yangi zakaz</h1></div><div class="bd">${L('Ish turi',`<select class="i" data-f="o_type">${TYPES.map(t=>`<option>${t}</option>`).join('')}</select>`)}${L('Tish raqamlari',I('o_teeth','11, 12'))}<div class="fl" style="gap:12px">${L('Rang',I('o_color','A2'),'flex:1')}${L('Muddat',I('o_due','','date'),'flex:1')}</div>${pickRow('o',['Fayllar',[['Rasm','image/*'],['Video','video/*'],['Fayl','']]])}${files('o')}${L('Izoh',TA('o_note'))}</div><div class="ft"><button class="b" data-act="create">Zakazni yuborish</button></div>`),
-order:()=>{const o=ord(),r=S.role,n=unread(o,r),ch=`<button class="b" style="background:#fff;color:${NV[r]};border:2px solid ${NV[r]}" data-go="chat">Chat${n?` · ${n} yangi`:''}</button>`;
-let rows,mid='',ft='';
-if(r==='lab'&&o.status==='review'){rows=kv('Modeler',o.modeler)+kv('Ish turi',`${o.type} · ${o.teeth}`)+kv('Fayl',o.mf)+`<div><span class="m">Izoh:</span> ${esc(o.mn||'—')}</div>`;
-mid=`<button class="b o" data-toast="Demo: fayl serverda saqlanmaydi">Modelni yuklab olish</button>${ch}${L(`Tuzatish sababi (kerak bo'lsa)`,TA('fx'))}`;
-ft=`<button class="b" data-act="accept">Qabul qilish</button><button class="b o" data-act="fix">Tuzatishga qaytarish</button>`}
-else{rows=kv('Ish turi',o.type)+kv('Tishlar',o.teeth)+kv('Rang',o.color)+kv('Muddat',o.due)+`<div><span class="m">Izoh:</span> ${esc(o.note||'—')}</div>`+(o.modeler&&r!=='mod'?kv('Modeler',o.modeler):'')+(r!=='lab'?kv('Lab',o.lab):'');
-mid=`${o.fix&&o.status==='work'?`<div class="c" style="border-color:#B42318"><b>Tuzatish sababi:</b> ${esc(o.fix)}</div>`:''}<button class="b o" data-toast="Demo: fayl serverda saqlanmaydi">Skanni yuklab olish</button>${o.status!=='new'||r!=='mod'?ch:''}`;
-if(r==='mod'&&o.status==='work'){mid+=`<button class="u" data-pick="w" data-acc=".stl">${S.files.w?.[0]?esc(S.files.w[0].n):`Exocad'da tayyorlangan modelni yuklash [.stl]`}</button>${L('Modeler izohi',TA('mn'))}`;ft=`<button class="b" data-act="submit">Tekshiruvga topshirish</button>`}
-if(r==='mod'&&o.status==='new')ft=`<button class="b" data-act="take" data-id="${o.id}">Qabul qilish</button>`}
-return R(`${back('orders')}<div class="hd t row"><h1>№${o.id}</h1>${badge(o)}</div><div class="bd"><div class="c col">${rows}</div>${mid}</div>${ft?`<div class="ft">${ft}</div>`:''}`)},
-chat:()=>{const o=ord(),r=S.role,nm={lab:'Lab',mod:'Modeler',adm:'Admin'};
-const msgs=o.chat.map(m=>m.w===r?`<div class="bub" style="align-self:flex-end;background:var(--acc);color:#fff;border-radius:14px 14px 4px 14px">${esc(m.t)}</div>`:`<div class="bub" style="align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px 14px 14px 4px"><div style="font-size:12px;font-weight:700" class="m">${nm[m.w]}</div>${esc(m.t)}</div>`).join('')||'<div class="sub" style="text-align:center">Xabar yo\'q</div>';
-return R(`${back('order')}<div class="hd t row"><h1 style="font-size:22px">Chat · №${o.id}</h1>${badge(o)}</div><div class="bd" id="msgs" style="gap:10px">${msgs}</div><div style="padding:10px 12px 20px;display:flex;gap:8px;align-items:center;background:#fff;border-top:1px solid var(--line)"><button aria-label="Biriktirish" data-pick="c" data-acc="" style="width:44px;height:44px;border:1px solid var(--bd);border-radius:22px;background:#fff;font-size:22px;font-weight:700;cursor:pointer">+</button><input class="i" id="cm" data-f="cm" placeholder="Xabar" aria-label="Xabar" style="flex:1;width:auto;min-width:0"><button aria-label="Yuborish" data-act="send" style="width:44px;height:44px;border:0;border-radius:22px;background:var(--acc);color:#fff;font-size:20px;font-weight:700;cursor:pointer">→</button></div>`)},
-port:()=>{const gr=()=>{const q=(S.draft.q||'').toLowerCase();return appr().filter(u=>(S.pf==='Hammasi'||(u.w||[]).includes(S.pf))&&u.n.toLowerCase().includes(q))};S.gr=gr;
-const g=gr(),rows=[];for(let i=0;i<g.length;i+=2)rows.push(tiles(g.slice(i,i+2),96));
-return R(`<div class="hd"><h1>Portfolyolar</h1><div class="m">Tasdiqlangan modelerlar ishlari</div></div><div class="bd"><label class="l"><span style="position:absolute;left:-9999px">Qidirish</span><input class="i" type="search" data-f="q" id="q" placeholder="Modeler qidirish" value="${v('q')}"></label><div style="display:flex;gap:8px;overflow:auto">${['Hammasi','Toj','Vinir','Implant'].map(t=>`<button class="chip ${S.pf===t?'on':''}" data-act="pf" data-k="${t}">${t}</button>`).join('')}</div><div id="grid" style="display:flex;flex-direction:column;gap:12px">${rows.join('')||'<div class="sub" style="text-align:center">Topilmadi</div>'}</div></div>${nav()}`)},
-set:()=>{const r=S.role,p=r==='lab'?D.lab:D.mod,row=(t,x,go)=>`<a data-go="${go}" style="display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-top:1px solid #E6EEEC;color:var(--ink);text-decoration:none;font-weight:600"><span>${t}</span><span class="m">${x}</span></a>`;
-return R(`<div class="hd"><h1>Sozlamalar</h1></div><div class="bd"><div class="c" style="display:flex;align-items:center;gap:14px"><span style="flex:0 0 52px;height:52px;border-radius:26px;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px">${r==='lab'?'L':r==='mod'?'M':'A'}</span><div><b>${esc(r==='lab'?p.person:me())}</b><div class="sub">${r==='lab'?esc(p.name):r==='mod'?'Modeler · Exocad '+esc(p.exo):'Administrator'}</div></div></div>
-<div class="c" style="padding:0;overflow:hidden">${row('Til',`O'zbekcha ›`,'lang').replace('border-top:1px solid #E6EEEC;','')}<label style="display:flex;justify-content:space-between;align-items:center;min-height:52px;padding:0 16px;border-top:1px solid #E6EEEC;font-weight:600">Bildirishnomalar<input type="checkbox" data-act="notif" ${D.notif?'checked':''} style="width:24px;height:24px;accent-color:var(--acc)"></label>${r!=='adm'?row(`Ma'lumotlarim`,'›','prof'):''}${row(`Admin bilan bog'lanish`,'›','contact')}</div>
-<a data-act="logout" style="display:flex;align-items:center;justify-content:center;min-height:52px;border-radius:14px;background:#fff;border:1px solid var(--line);color:#B42318;font-weight:700;text-decoration:none">Chiqish</a></div>${nav()}`)},
-lang:()=>R(`<div class="hd"><div class="m">Sozlamalar</div><h1>Til / Язык / Language</h1></div><div class="bd"><div class="c">${[['uz',`O'zbekcha`],['ru','Русский'],['en','English']].map(([k,t])=>`<label style="display:flex;align-items:center;gap:12px;min-height:48px;font-weight:600"><input type="radio" name="lang" value="${k}" ${D.lang===k?'checked':''} style="width:22px;height:22px;accent-color:var(--acc)">${t}</label>`).join('')}</div><div style="font-weight:800;font-size:17px;margin-top:8px">Rollar ranglari</div><div class="c">${[['lab','Ish beruvchi (lab)'],['mod','Modeler'],['adm','Admin']].map(([k,t])=>`<div style="display:flex;align-items:center;gap:12px;min-height:40px"><span style="width:24px;height:24px;border-radius:6px;background:${A[k]}"></span>${t}</div>`).join('')}</div></div><div style="padding:12px 16px 24px"><button class="b" data-act="savelang">Saqlash</button></div>`),
-contact:()=>R(`${back('set')}<div class="hd t"><h1>Admin bilan bog'lanish</h1><div class="m">Savol yoki muammo bo'lsa yozing</div></div><div class="bd"><div class="c">${[['Telegram','@dentbridge_admin'],['Telefon','+998 90 000 00 00'],['Ish vaqti','09:00–18:00']].map(([a,b])=>`<div class="row" style="min-height:40px"><span class="m">${a}</span><b>${b}</b></div>`).join('')}</div>${L('Mavzu',`<select class="i" data-f="c_topic"><option>Zakaz haqida</option><option>Ro'yxatdan o'tish</option><option>Boshqa</option></select>`)}${L('Xabar',TA('c_msg',4))}</div><div class="ft"><button class="b" data-act="contact">Adminga yuborish</button></div>`),
-admin:()=>{const us=D.users,over=D.orders.filter(o=>o.status!=='done'&&o.due<'2026-10-08').length;
-return R(`<div class="hd"><div class="m">Admin</div><h1>Boshqaruv</h1></div><div class="bd"><div style="display:flex;flex-wrap:wrap;gap:12px">${[['Zakazlar',D.orders.length],[`Muddati o'tgan`,over],['Modelerlar',us.filter(u=>u.r==='Modeler').length],['Laboratoriyalar',us.filter(u=>u.r==='Lab').length]].map(([t,n])=>`<div class="c" style="flex:1 1 150px"><div class="m" style="font-weight:600;font-size:13px">${t}</div><div class="big">${n}</div></div>`).join('')}</div><div style="font-weight:800;font-size:17px">Foydalanuvchilar</div>${us.map((u,i)=>`<div class="c row"><div ${u.r==='Modeler'?`data-go="adminreview" data-id="${i}" style="cursor:pointer"`:''}><b>${esc(u.n)}</b><div><span class="s ${u.r==='Lab'?'s3':'s1'}">${u.r}</span>${u.st!=='ok'?` <span class="s s2">${u.st==='pending'?'Kutilmoqda':u.st==='rejected'?'Rad etilgan':'Bloklangan'}</span>`:''}</div></div><button data-act="usr" data-id="${i}" style="min-height:44px;padding:0 14px;border-radius:10px;font-weight:700;cursor:pointer;${u.st==='ok'?'background:#fff;color:var(--ink);border:1px solid var(--bd)':'background:var(--acc);color:#fff;border:0'}">${u.st==='ok'?'Bloklash':'Tasdiqlash'}</button></div>`).join('')}</div>${nav()}`)},
-adminreview:()=>{const u=D.users[S.rev];return R(`${back('admin')}<div class="hd t"><h1>Modeler arizasi</h1><div class="m">${esc(u.n)}</div></div><div class="bd"><div class="c col" style="gap:4px">${kv('Telefon',u.phone||'—')}<div><span class="m">Exocad:</span> <b>${esc(u.exo)}</b> · <span class="m">Tajriba:</span> <b>${esc(u.exp)} yil</b></div></div><div style="font-weight:800">Portfolio</div><div class="fl">${['Rasm','Video','Rasm'].map(t=>`<div class="ph" style="height:80px;background:#D9CDE8;color:#3B2360">${t}</div>`).join('')}</div><div class="c row"><div><b>TEST-01</b><div class="sub">${esc(u.test||'model.stl')}</div></div><button class="b o" style="width:auto;min-height:44px;padding:0 14px;font-size:15px" data-toast="Demo: fayl serverda saqlanmaydi">Yuklab olish</button></div>${L('Izoh yoki rad etish sababi',TA('ar_note',2))}</div><div class="ft"><button class="b" data-act="approve">Tasdiqlash</button><button class="b o" data-act="reject">Rad etish</button></div>`)},
-admindb:()=>R(`<div class="hd"><div class="m">Admin</div><h1>Baza</h1></div><div class="bd"><div class="fl" style="gap:10px"><button class="b" style="flex:1" data-go="adminimport">Import</button><button class="b o" style="flex:1" data-toast="Demo: eksport o'chirilgan">Eksport</button></div>${[['Foydalanuvchilar',D.users.length,'admin'],['Zakazlar',D.orders.length,'orders'],['Portfolyolar',appr().length,'port']].map(([t,n,g])=>`<div class="c col" style="gap:10px"><div class="row" style="align-items:baseline"><b style="font-size:17px">${t}</b><span class="big" style="font-size:26px">${n}</span></div><div class="sub">Oxirgi yangilanish: 2026-10-08</div><div class="fl"><button class="b o sm" data-go="${g}">Ochish</button><button class="b o sm" data-toast="Demo: eksport o'chirilgan">Eksport</button></div></div>`).join('')}</div>${nav()}`),
-adminimport:()=>R(`${back('admindb')}<div class="hd t"><h1>Import</h1></div><div class="bd"><div class="fl">${['Foydalanuvchilar','Zakazlar','Portfolyo'].map((t,i)=>`<span data-act="imp" data-k="${i}" style="text-align:center;padding:11px 4px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;${S.imp===i?'background:#6B3FA0;color:#fff':'background:#fff;border:1px solid var(--bd)'}">${t}</span>`).join('')}</div><button class="u" style="border-color:#9D86C0" data-pick="i" data-acc=".csv,.xlsx,.json">${S.files.i?.[0]?esc(S.files.i[0].n):'Fayl tanlang [.csv .xlsx .json]'}</button><div class="c"><b>Ustunlarni moslash</b>${['Ism','Telefon','Rol'].map(t=>`<div class="row" style="min-height:44px"><b>${t}</b><select class="i" style="width:150px;min-height:40px" aria-label="${t}"><option>ustun</option></select></div>`).join('')}</div><div class="c row"><span><b>0</b> qo'shiladi · <b>0</b> xato</span><span class="s s2">Tekshiruv</span></div><label style="display:flex;align-items:center;gap:10px;min-height:44px;font-weight:600"><input type="checkbox" style="width:22px;height:22px;accent-color:#6B3FA0">Mavjud yozuvlarni yangilash</label></div><div class="ft"><button class="b" data-toast="Demo rejimida import ishlamaydi">Import qilish</button><button class="b o" data-toast="Demo: shablon yo'q">Shablonni yuklab olish</button></div>`)
+start:()=>scr('zak',`<div class="hd"><button class="lng" data-toast="Til rolni tanlagandan keyin Sozlamalarda o'zgaradi">UZ</button><div class="m">DentBridge · ${esc(D.lab.name)}</div><h1>Xush kelibsiz</h1><div class="m">Rolingizni tanlang</div></div><div class="bd">
+${[['zak','Z','Zakazchik','Shifokor, klinika: naryad bering, hisobni kuzating'],['tex','T','Laboratoriya xodimi','Kasbingiz bo\'yicha: gipschi, CAD modeler, frezerchi, keramist va boshqalar'],['kas','K','Kassir','Kunlik kassa, to\'lovlar, xarajatlar'],['adm','R','Rahbar (admin)','Naryadlar, xodimlar, kassa, hisobot, baza']].map(([k,l,t,d])=>`<button class="rb" data-act="role" data-k="${k}"><i class="av" style="background:${A[k]}">${l}</i><span><b style="display:block;font-size:17px">${t}</b><span class="m" style="font-size:14px">${d}</span></span></button>`).join('')}
+<div class="sub">Demo: hamma ma'lumot shu brauzerda saqlanadi. Yangi xodim ariza topshirgach, rahbar tasdiqlaydi.</div></div>`),
+
+who:()=>{const r=S.role,list=kind(r);
+  const grp=r==='tex'?Object.keys(PROF).map(p=>[p,list.filter(u=>u.prof===p)]).filter(x=>x[1].length):[['',list]];
+  return R(`${back('start')}<div class="hd t"><div class="m">${ROLE[r]}</div><h1>Kim sifatida kirasiz?</h1></div><div class="bd">
+  ${grp.map(([p,us])=>`${p?`<div class="sub" style="font-weight:700;margin-top:4px">${esc(PROF[p])}</div>`:''}<div class="list">${us.map(u=>`<a href="#" class="li" data-act="pick" data-id="${u.id}"><span>${esc(u.n)}${r==='zak'?`<div class="sub">${esc(u.sub||'')}${u.city?' · '+esc(u.city):''}</div>`:''}</span><span>${ubadge(u)} ›</span></a>`).join('')||'<div class="li sub">Hozircha yo\'q</div>'}</div>`).join('')}
+  ${r==='kas'?'<div class="sub">Kassirni rahbar «Xodimlar» bo\'limida qo\'shadi.</div>':''}</div>
+  ${r!=='kas'?`<div class="ft"><button class="b" data-go="${r==='zak'?'regzak':'regtex'}">+ Ro'yxatdan o'tish</button></div>`:''}`)},
+
+regzak:()=>R(`${back('who')}<div class="hd t"><h1>Zakazchik ro'yxati</h1></div><div class="bd">${L('Ism yoki klinika nomi',I('z_name','Dr. Ism Familiya'))}${L('Turi',SEL('z_sub',[['Shifokor','Shifokor'],['Klinika','Klinika'],['Texnik','Zubtexnik']]))}${L('Telefon',I('z_phone','+998 __ ___ __ __','tel'))}${L('Shahar',I('z_city','Shahar'))}<div class="c sub" style="font-size:14px">Zakazchikka admin tasdig'i kerak emas: darhol naryad bera olasiz.</div></div><div class="ft"><button class="b" data-act="regzak">Ro'yxatdan o'tish</button></div>`),
+
+regtex:()=>{const cad=(S.draft.t_prof||'gips')==='cad';
+  return R(`${back(D.me.tex&&P(D.me.tex)?'regwait':'who')}<div class="hd t"><h1>Xodim anketasi</h1></div>${steps(1,cad?['Anketa','Sinov keys','Tasdiq']:['Anketa','Tasdiq'])}<div class="bd">${L('Ism',I('t_name','Ism Familiya'))}${L('Telefon',I('t_phone','+998 __ ___ __ __','tel'))}${L('Kasb',SEL('t_prof',Object.entries(PROF),'data-rr="1"'))}<div class="fl">${cad?L('Exocad versiyasi',I('t_exo','3.x')):''}${L('Tajriba (yil)',I('t_exp','0','number','min="0"'))}</div>${pickRow('t','Portfolio',[['Rasm','image/*'],['Video','video/*'],['Havola','']])}${S.link?I('t_link','https://'):''}${files('t')}</div><div class="ft"><button class="b" data-act="regtex">${cad?'Keyingi: sinov keys':'Arizani yuborish'}</button></div>`)},
+
+regtest:()=>R(`${back('regtex')}<div class="hd t"><h1>Sinov keysi</h1></div>${steps(2,['Anketa','Sinov keys','Tasdiq'])}<div class="bd"><div class="c col"><div class="row"><b>TEST-01</b><span class="s s1">Sinov</span></div><div>Zirkoniy toj · 11, 21</div><div class="sub">Muddat: 48 soat</div></div><button class="b o" data-toast="Demo: sinov skani serverda saqlanmaydi">Skanni yuklab olish</button><button class="u" data-pick="ts" data-acc=".stl">${S.files.ts?.[0]?esc(S.files.ts[0].n):'Tayyor modelni yuklash [.stl]'}</button>${L('Izoh',TA('ts_note'))}</div><div class="ft"><button class="b" data-act="regtest">Adminga yuborish</button></div>`),
+
+regwait:()=>{const u=me();if(!u)return SC.start();const st=u.st||'pending';
+  const t={pending:['s2','Kutilmoqda',"Rahbar ko'rib chiqmoqda",'Anketangiz tekshirilmoqda. Natija Telegram orqali yuboriladi.'],ok:['s3','Tasdiqlandi','Ariza tasdiqlandi','Endi ishlarni qabul qilishingiz mumkin.'],rejected:['s5','Rad etildi','Ariza rad etildi',u.note||'Anketani tahrirlab, qayta yuboring.'],blocked:['s5','Bloklangan','Akkaunt bloklangan',"Rahbar bilan bog'laning."]}[st];
+  return R(`<div class="hd" style="padding-top:20px"><div class="m">${esc(PROF[u.prof]||'')}</div><h1>Ariza yuborildi</h1></div><div class="bd"><div class="c col" style="gap:8px"><span class="s ${t[0]}" style="align-self:flex-start">${t[1]}</span><b style="font-size:18px">${t[2]}</b><div class="m">${esc(t[3])}</div></div></div><div class="ft">${st==='ok'?`<button class="b" data-go="home">Boshlash</button>`:st!=='blocked'?`<button class="b o" data-act="edittex">Anketani tahrirlash</button>`:''}<a href="#" class="sub" data-act="logout" style="text-align:center">Chiqish</a></div>`)},
+
+home:()=>{const r=S.role,u=me();
+  if(r==='zak'){const os=D.orders.filter(o=>o.zak===u.id),act=os.filter(o=>!o.del),rd=os.filter(o=>ostat(o)==='ready'),db=debt(u.id);
+    return R(`<div class="hd row"><div><div class="m">Salom, ${esc(u.n)}</div><h1 style="font-size:24px">${esc(D.lab.name)}</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd">
+    <div class="hero">${tooth}<div class="k">Faol naryadlar</div><div class="n">${act.length}</div><div class="k">Tekshirish kutayotgan: ${rd.length}</div><button class="b" data-go="neworder">+ Yangi naryad</button></div>
+    <div class="fl" style="gap:12px"><button class="tile" data-go="orders"><b>Naryadlar</b><span class="m">${os.filter(o=>ostat(o)==='work').length} jarayonda</span></button><button class="tile" data-go="bill"><b>Hisob</b><span class="${db>0?'neg':'m'}">${db>0?'Qarz: '+som(db):'Qarz yo\'q'}</span></button></div>
+    ${rd.length?`<div class="sec"><b>Tekshirish kerak</b></div>${rd.map(o=>ocard(o)).join('')}`:''}
+    <div class="sec"><b>So'nggi naryadlar</b><a class="link" href="#" data-go="orders">Hammasi ›</a></div>${os.slice(0,3).map(o=>ocard(o)).join('')||'<div class="c sub">Hali naryad yo\'q</div>'}</div>${nav()}`)}
+  if(r==='tex'){const open=[],mine=[];
+    for(const o of D.orders)o.stages.forEach((s,i)=>{if(s.p===u.prof&&avail(o,i))open.push(o);if(s.s===u.id&&s.st==='work')mine.push(o)});
+    const e=earn(u.id,today().slice(0,7));
+    return R(`<div class="hd row"><div><div class="m">Salom, ${esc(u.n)}</div><h1 style="font-size:24px">${esc(PROF[u.prof])}</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd">
+    <div class="hero">${tooth}<div class="k">Ochiq ishlar (${esc(PSH[u.prof])})</div><div class="n">${open.length}</div><div class="k">Jarayonda: ${mine.length}</div><button class="b" data-go="jobs">Ishlarni ko'rish</button></div>
+    <div class="fl" style="gap:12px"><button class="tile" data-go="earn"><b>Bu oy daromad</b><span class="m">${som(e.sum)}</span></button><button class="tile" data-go="contact"><b>Rahbar bilan bog'lanish</b><span class="m">Savol yoki muammo</span></button></div>
+    <div class="sec"><b>Joriy ishlarim</b></div>${mine.map(o=>ocard(o)).join('')||'<div class="c sub">Hozircha joriy ish yo\'q</div>'}</div>${nav()}`)}
+  // Rahbar
+  const t=today(),c=calc([t]),cm=calc(monthDates(t.slice(0,7))),act=D.orders.filter(o=>!o.del),od=act.filter(overdue).length,pend=D.people.filter(x=>x.st==='pending').length;
+  const qarz=kind('zak').reduce((a,z)=>a+Math.max(0,debt(z.id)),0);
+  return R(`<div class="hd row"><div><div class="m">Rahbar · ${esc(me().n)}</div><h1 style="font-size:24px">${esc(D.lab.name)}</h1></div><button class="lng" style="position:static" data-go="lang">UZ</button></div><div class="bd">
+  <div class="grid2">
+   <div class="kpi" data-go="kassa"><div class="m">Bugun kassaga</div><b>${som(c.N+c.P)}</b></div>
+   <div class="kpi" data-go="rep"><div class="m">Bu oy foyda</div><b class="${cm.foida<0?'neg':''}">${som(cm.foida)}</b></div>
+   <div class="kpi" data-go="orders"><div class="m">Faol naryadlar</div><b>${act.length}${od?` <span class="s s5" style="font-size:11px;vertical-align:middle">${od} kechikkan</span>`:''}</b></div>
+   <div class="kpi" data-go="clients"><div class="m">Zakazchilar qarzi</div><b>${som(qarz)}</b></div>
+   <div class="kpi" data-go="staff"><div class="m">Xodimlar</div><b>${kind('tex').filter(x=>x.st==='ok').length}${pend?` <span class="s s2" style="font-size:11px;vertical-align:middle">${pend} ariza</span>`:''}</b></div>
+   <div class="kpi" data-go="kassa"><div class="m">Kassada naqd (bugun)</div><b class="${c.kassa<0?'neg':''}">${som(c.kassa)}</b></div>
+  </div>
+  <button class="b" data-go="neworder">+ Yangi naryad</button>
+  <div class="sec"><b>Bosqichlar bo'yicha yuklama</b></div>
+  <div class="list">${Object.keys(PROF).map(p=>{let w=0,q=0;for(const o of act)o.stages.forEach((s,i)=>{if(s.p===p){if(s.st==='work')w++;else if(avail(o,i))q++}});return w||q?`<div class="li"><span>${esc(PROF[p])}</span><span class="sub">${q} navbatda · ${w} ishda</span></div>`:''}).join('')||'<div class="li sub">Faol bosqich yo\'q</div>'}</div>
+  <div class="sec"><b>So'nggi naryadlar</b><a class="link" href="#" data-go="orders">Hammasi ›</a></div>${D.orders.slice(0,3).map(o=>ocard(o)).join('')}</div>${nav()}`)},
+
+orders:()=>{const r=S.role,u=me();let os=r==='zak'?D.orders.filter(o=>o.zak===u.id):D.orders;
+  const f=S.flt;const fl={all:()=>true,new:o=>ostat(o)==='new',work:o=>ostat(o)==='work',ready:o=>ostat(o)==='ready',del:o=>o.del,late:o=>overdue(o)};
+  const list=os.filter(fl[f]||fl.all);
+  return R(`<div class="hd">${lng}<div class="m">${r==='zak'?esc(u.n):'Laboratoriya'}</div><h1>Naryadlar</h1></div>
+  <div style="padding:0 16px 8px"><div class="chips">${[['all','Hammasi'],['new','Yangi'],['work','Jarayonda'],['ready','Tayyor'],['del','Topshirilgan'],['late','Kechikkan']].map(([k,t])=>`<button class="chip ${f===k?'on':''}" data-act="flt" data-k="${k}">${t} · ${os.filter(fl[k]).length}</button>`).join('')}</div></div>
+  <div class="bd">${list.map(o=>ocard(o)).join('')||'<div class="c sub" style="text-align:center">Naryad yo\'q</div>'}</div>
+  ${r!=='tex'?`<div class="ft" style="padding-bottom:10px"><button class="b" data-go="neworder">+ Yangi naryad</button></div>`:''}${nav()}`)},
+
+neworder:()=>{const r=S.role,pr=PR(+(S.draft.o_pr||D.price[0]?.id)),zid=r==='zak'?me().id:+(S.draft.o_zak||kind('zak')[0]?.id),z=P(zid);
+  const units=num(S.draft.o_units)||teethCount(S.draft.o_teeth)||1,sum=pr?Math.round(units*pr.price*(1-(z?.disc||0)/100)):0;
+  return R(`${back('orders')}<div class="hd t"><h1>Yangi naryad</h1></div><div class="bd">
+  ${r!=='zak'?L('Zakazchik',SEL('o_zak',kind('zak').map(x=>[x.id,x.n]),'data-rr="1"')):''}
+  ${L('Ish turi',SEL('o_pr',D.price.map(x=>[x.id,`${x.n} — ${som(x.price)} / ${x.unit}`]),'data-rr="1"'))}
+  ${pr?`<div class="sub">Bosqichlar: ${pr.st.map(s=>esc(PSH[s[0]])).join(' → ')}</div>`:''}
+  ${L('Bemor',I('o_pat','Ism, familiya'))}
+  <div class="fl" style="gap:12px">${L('Tish raqamlari',I('o_teeth','11, 12','text','data-rr="1"'),'flex:2')}${L(`Soni (${esc(pr?.unit||'birlik')})`,I('o_units',String(teethCount(S.draft.o_teeth)||1),'number','min="1" data-rr="1"'),'flex:1')}</div>
+  <div class="fl" style="gap:12px">${L('Rang',I('o_color','A2'),'flex:1')}${L('Muddat',I('o_due','','date',`min="${today()}"`),'flex:1')}</div>
+  ${pickRow('o','Fayllar (skan, rasm, video)',[['Rasm','image/*'],['Video','video/*'],['Fayl','']])}${files('o')}${L('Izoh',TA('o_note'))}
+  <div class="c row"><span class="m">Taxminiy summa${z?.disc?` (chegirma ${z.disc}%)`:''}</span><b>${som(sum)}</b></div></div>
+  <div class="ft"><button class="b" data-act="create">Naryadni yuborish</button></div>`)},
+
+order:()=>{const o=ord();if(!o)return SC.orders();const r=S.role,u=me(),pr=PR(o.pr),n=unread(o,r),st=ostat(o),paid=ix().byOrd[o.id]||0;
+  const ch=`<button class="b o" style="color:var(--nv);border:2px solid var(--nv)" data-go="chat">Chat${n?` · ${n} yangi`:''}</button>`;
+  let rows=kv('Ish turi',esc(pr?.n||'—'))+kv('Tishlar',`${esc(o.teeth)} · ${o.units} ${esc(pr?.unit||'')}`)+kv('Rang',esc(o.color||'—'))+kv('Muddat',`<span class="${overdue(o)?'neg':''}">${esc(o.due)}</span>`)+kv('Bemor',esc(o.patient||'—'));
+  if(r!=='zak')rows+=kv('Zakazchik',esc(pname(o.zak)));
+  if(r!=='tex')rows+=kv('Summa',som(o.sum))+kv("To'langan",som(paid));
+  rows+=`<div class="sub" style="margin-top:4px">Izoh: ${esc(o.note||'—')}</div>`;
+  const stg=o.stages.map((s,i)=>{const fix=s.fix&&s.st==='work'?`<div class="sub neg">Tuzatish: ${esc(s.fix)}</div>`:'';
+    const who=s.s?esc(pname(s.s)):avail(o,i)?'Navbatda':'Kutmoqda';
+    let act='';
+    if(r==='adm'&&s.st==='done'&&!o.del)act=`<button class="link" style="border:0;background:none;color:var(--red)" data-act="sback" data-i="${i}">Qaytarish</button>`;
+    return `<div class="stg"><span class="dot ${s.st}"></span><div style="flex:1;min-width:0"><div class="row"><b style="font-size:14px">${i+1}. ${esc(PSH[s.p])}</b>${r!=='zak'?`<span class="sub">${som(s.rate*o.units)}</span>`:''}</div><div class="sub">${esc(PROF[s.p])} · ${who}${s.at&&s.st==='done'?' · '+esc(s.at):''}${s.file?' · '+esc(s.file):''}</div>${fix}${act}</div></div>`}).join('');
+  let mid=`<div class="c"><b style="display:block;margin-bottom:6px">Bosqichlar</b>${stg}</div><button class="b o" data-toast="Demo: fayl serverda saqlanmaydi">Skanni yuklab olish</button>${ch}`,ft='';
+  if(r==='tex'){const i=o.stages.findIndex((s,k)=>s.p===u.prof&&(avail(o,k)||(s.s===u.id&&s.st==='work')));
+    if(i>=0&&o.stages[i].st==='wait')ft=`<button class="b" data-act="take" data-i="${i}">Bosqichni qabul qilish</button>`;
+    else if(i>=0){mid+=`<button class="u" data-pick="w" data-acc="${u.prof==='cad'?'.stl':''}">${S.files.w?.[0]?esc(S.files.w[0].n):u.prof==='cad'?"Exocad'da tayyorlangan modelni yuklash [.stl]":'Natija rasmi yoki fayli (ixtiyoriy)'}</button>${L('Izoh',TA('mn',2))}`;ft=`<button class="b" data-act="sdone" data-i="${i}">Bosqichni topshirish</button>`}}
+  if(r==='zak'&&st==='ready'){mid+=L(`Tuzatish sababi (kerak bo'lsa)`,TA('fx',2));ft=`<button class="b" data-act="accept">Qabul qilish</button><button class="b o" data-act="fix">Tuzatishga qaytarish</button>`}
+  if((r==='adm'||r==='kas')&&st==='ready')ft=`<button class="b" data-act="deliver">Zakazchikka topshirildi</button>`;
+  if((r==='adm'||r==='kas')&&o.sum>paid)ft+=`<button class="b o" data-act="payorder">To'lov qabul qilish</button>`;
+  return R(`${back('orders')}<div class="hd t row"><h1>№${o.id}</h1>${badge(o)}</div><div class="bd"><div class="c col" style="gap:0">${rows}</div>${mid}</div>${ft?`<div class="ft">${ft}</div>`:''}`)},
+
+chat:()=>{const o=ord(),r=S.role;
+  const msgs=o.chat.map(m=>m.w===r?`<div class="bub" style="align-self:flex-end;background:var(--acc);color:#fff;border-radius:14px 14px 4px 14px">${esc(m.t)}</div>`:`<div class="bub" style="align-self:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px 14px 14px 4px"><div style="font-size:12px;font-weight:700" class="m">${esc(m.n||ROLE[m.w])} · ${ROLE[m.w]}</div>${esc(m.t)}</div>`).join('')||'<div class="sub" style="text-align:center">Xabar yo\'q</div>';
+  return R(`${back('order')}<div class="hd t row"><h1 style="font-size:22px">Chat · №${o.id}</h1>${badge(o)}</div><div class="bd" id="msgs" style="gap:10px">${msgs}</div><div style="padding:10px 12px 20px;display:flex;gap:8px;align-items:center;background:#fff;border-top:1px solid var(--line)"><button aria-label="Biriktirish" data-pick="c" data-acc="" style="width:44px;height:44px;border:1px solid var(--bd);border-radius:22px;background:#fff;font-size:22px;font-weight:700;cursor:pointer">+</button><input class="i" id="cm" data-f="cm" placeholder="Xabar" aria-label="Xabar" style="flex:1;width:auto;min-width:0"><button aria-label="Yuborish" data-act="send" style="width:44px;height:44px;border:0;border-radius:22px;background:var(--acc);color:#fff;font-size:20px;font-weight:700;cursor:pointer">→</button></div>`)},
+
+jobs:()=>{const u=me(),f=S.flt==='mine'?'mine':S.flt==='done'?'done':'open',list=[];
+  for(const o of D.orders)o.stages.forEach((s,i)=>{
+    if(f==='open'&&s.p===u.prof&&avail(o,i))list.push([o,s]);
+    if(f==='mine'&&s.s===u.id&&s.st==='work')list.push([o,s]);
+    if(f==='done'&&s.s===u.id&&s.st==='done')list.push([o,s]);});
+  return R(`<div class="hd">${lng}<div class="m">${esc(PROF[u.prof])} · ${esc(u.n)}</div><h1>Ishlar</h1></div><div class="tabs">${[['open','Ochiq'],['mine','Jarayonda'],['done','Topshirilgan']].map(([k,t])=>`<button class="${f===k?'on':''}" data-act="flt" data-k="${k}">${t}</button>`).join('')}</div>
+  <div class="bd">${list.map(([o,s])=>ocard(o,`<div class="sub" style="margin-top:4px">${esc(PSH[s.p])} · ${o.units} ${esc(PR(o.pr)?.unit||'')} · <b style="color:var(--ink)">${som(s.rate*o.units)}</b></div>`)).join('')||'<div class="c sub" style="text-align:center">Ish yo\'q</div>'}</div>${nav()}`)},
+
+earn:()=>{const u=me(),ym=S.month,e=earn(u.id,ym);
+  return R(`<div class="hd"><div class="m">${esc(u.n)} · ${esc(PROF[u.prof])}</div><h1>Daromad</h1></div><div class="bd">
+  ${L('Oy',I('month','','month','data-rr="1"'))}
+  <div class="grid2"><div class="kpi"><div class="m">Hisoblandi</div><b>${som(e.sum)}</b></div><div class="kpi"><div class="m">Berildi (avans/oylik)</div><b>${som(e.paid)}</b></div></div>
+  <div class="c row"><span class="m">Qoldiq (olinmagan)</span><b class="${e.sum-e.paid<0?'neg':''}">${som(e.sum-e.paid)}</b></div>
+  <div class="sec"><b>Zakazchilar bo'yicha</b><span class="sub">${e.cnt} ta bosqich</span></div>
+  ${e.rows.length?table(['Zakazchik','Birlik','Narx','Summa'],e.rows.map(r=>[esc(pname(r.zak)),r.units,fmt(r.rate),fmt(r.sum)]),['Jami',e.rows.reduce((a,r)=>a+r.units,0),'',fmt(e.sum)]):'<div class="c sub">Bu oyda topshirilgan bosqich yo\'q</div>'}
+  </div>${nav()}`)},
+
+bill:()=>{const u=me(),os=D.orders.filter(o=>o.zak===u.id),pays=[];
+  for(const d of Object.keys(D.days).sort().reverse())for(const e of D.days[d].in)if(e[0]===u.id)pays.push([d,e]);
+  const b=billed(u.id),p=ix().by[u.id]||0;
+  return R(`<div class="hd"><div class="m">${esc(u.n)}</div><h1>Hisob</h1></div><div class="bd">
+  <div class="grid2"><div class="kpi"><div class="m">Hisoblangan</div><b>${som(b)}</b></div><div class="kpi"><div class="m">To'langan</div><b>${som(p)}</b></div></div>
+  <div class="c row"><span class="m">${b-p>=0?'Qarz':"Ortiqcha to'lov"}</span><b class="${b-p>0?'neg':''}">${som(Math.abs(b-p))}</b></div>
+  <div class="sec"><b>Naryadlar</b></div>${table(['Naryad','Holat','Summa',"To'langan"],os.map(o=>[`№${o.id}`,OST[ostat(o)][0],fmt(o.sum),fmt(ix().byOrd[o.id]||0)]))}
+  <div class="sec"><b>To'lovlar</b></div><div class="list">${pays.slice(0,30).map(([d,e])=>`<div class="li"><span>${esc(d)}<div class="sub">${e[1]==='n'?'Naqd':'Plastik'}${e[3]?' · №'+e[3]:''}</div></span><b>${som(e[2])}</b></div>`).join('')||'<div class="li sub">To\'lov yo\'q</div>'}</div></div>${nav()}`)},
+
+port:()=>{const f=S.pf,us=kind('tex').filter(x=>x.st==='ok'&&(f==='all'||x.prof===f)),profs=[...new Set(kind('tex').filter(x=>x.st==='ok').map(x=>x.prof))];
+  return R(`<div class="hd"><h1>Texniklar</h1><div class="m">Tasdiqlangan laboratoriya xodimlari</div></div><div class="bd"><div class="chips">${[['all','Hammasi'],...profs.map(p=>[p,PSH[p]])].map(([k,t])=>`<button class="chip ${f===k?'on':''}" data-act="pf" data-k="${k}">${esc(t)}</button>`).join('')}</div>${us.map(ptile).join('')||'<div class="c sub">Topilmadi</div>'}</div>${nav()}`)},
+
+/* ---------- Kassa ---------- */
+kassa:()=>{const d=S.kdate,x=D.days[d]||{in:[],adv:[],exp:[],bank:0,oth:[]},c=calc([d]);
+  const del=(k,i)=>`<button class="x" data-act="kdel" data-k="${k}" data-i="${i}" aria-label="O'chirish">×</button>`;
+  const sec=(t,k,items)=>`<div class="sec"><b>${t}</b><button class="link" style="border:0;background:none;color:var(--nv);cursor:pointer" data-act="kadd" data-k="${k}">+ Qo'shish</button></div><div class="list">${items||'<div class="li sub">Yozuv yo\'q</div>'}</div>`;
+  return R(`<div class="hd"><div class="m">Kassa · ${esc(D.lab.name)}</div><h1>${esc(dayName(d))}</h1></div><div class="bd">
+  <div class="dn"><button data-act="kday" data-k="-1" aria-label="Oldingi kun">‹</button>${I('kdate','','date','data-rr="1" style="flex:1"')}<button data-act="kday" data-k="1" aria-label="Keyingi kun">›</button></div>
+  ${sumCard(c)}
+  ${sec('Kirim (kim topshirdi)','in',x.in.map((e,i)=>`<div class="li"><span>${esc(pname(e[0]))}<div class="sub">${e[1]==='n'?'Naqd':'Plastik'}${e[3]?' · №'+e[3]:''}${pctOf(e[0],e[1])?` · ulush ${Math.round(pctOf(e[0],e[1])*100)}%`:''}</div></span><span class="dn"><b>${fmt(e[2])}</b>${del('in',i)}</span></div>`).join(''))}
+  ${sec('Avans / oylik (oldi)','adv',x.adv.map((e,i)=>`<div class="li"><span>${esc(pname(e[0]))}</span><span class="dn"><b>${fmt(e[1])}</b>${del('adv',i)}</span></div>`).join(''))}
+  ${sec('Xarajat (nimaga sarflandi)','exp',x.exp.map((e,i)=>`<div class="li"><span>${esc(e[0])}</span><span class="dn"><b>${fmt(e[1])}</b>${del('exp',i)}</span></div>`).join(''))}
+  ${sec('Boshqa kirimlar','oth',x.oth.map((e,i)=>`<div class="li"><span>${esc(e[0])}<div class="sub">${e[1]==='n'?'Naqd':'Plastik'}</div></span><span class="dn"><b>${fmt(e[2])}</b>${del('oth',i)}</span></div>`).join(''))}
+  ${sec('Bankka berilgan','bank',x.bank?`<div class="li"><span>Bank</span><span class="dn"><b>${fmt(x.bank)}</b>${del('bank',0)}</span></div>`:'')}
+  </div>${nav()}`)},
+
+kform:()=>{const k=S.kt,T={in:'Kirim',adv:'Avans / oylik',exp:'Xarajat',oth:'Boshqa kirim',bank:'Bankka berish'}[k];
+  const ppl=D.people.filter(x=>x.kind!=='adm'&&(k==='in'?x.kind==='zak'||x.pct:true));
+  const pid=+(S.draft.k_p||ppl[0]?.id),ords=k==='in'?D.orders.filter(o=>o.zak===pid&&o.sum>(ix().byOrd[o.id]||0)):[];
+  const grp=k==='adv'?ppl.slice().sort((a,b)=>(a.kind==='tex'?0:1)-(b.kind==='tex'?0:1)):ppl;
+  return R(`${back('kassa')}<div class="hd t"><div class="m">${esc(dayName(S.kdate))}</div><h1>${T}</h1></div><div class="bd">
+  ${k==='in'||k==='adv'?L(k==='in'?'Kim topshirdi':'Kimga berildi',SEL('k_p',grp.map(x=>[x.id,`${x.n}${x.kind==='tex'?' · '+(PSH[x.prof]||''):x.kind==='kas'?' · kassir':''}`]),'data-rr="1"')):''}
+  ${k==='exp'?L('Nimaga sarflandi',I('k_t','Material, oylik, ijara...')):''}
+  ${k==='oth'?L('Kim berdi / izoh',I('k_t','Masalan: qarz qaytdi')):''}
+  ${k==='in'||k==='oth'?L("To'lov turi",SEL('k_m',[['n','Naqd'],['p','Plastik']])):''}
+  ${L(`Summa (${unitHint()})`,I('k_s',D.kInK?'350':'350000','text','inputmode="decimal"'))}
+  ${k==='in'&&ords.length?L('Naryad (ixtiyoriy)',SEL('k_o',[['','— Naryadsiz —'],...ords.map(o=>[o.id,`№${o.id} · qoldiq ${som(o.sum-(ix().byOrd[o.id]||0))}`])])):''}
+  ${k==='in'&&pid&&pctOf(pid,'n')?`<div class="sub">Bu shaxs ulushi: naqd ${Math.round(pctOf(pid,'n')*100)}%, plastik ${Math.round(pctOf(pid,'p')*100)}% (Plan)</div>`:''}
+  <div class="sub">Summalar ${unitHint()}da kiritiladi. Sozlamalarda o'zgartirish mumkin.</div></div>
+  <div class="ft"><button class="b" data-act="ksave">Saqlash</button></div>`)},
+
+rep:()=>{const ym=S.month,ds=monthDates(ym),c=calc(ds),y=ym.slice(0,4);
+  const months=[...new Set(Object.keys(D.days).filter(d=>d.startsWith(y)).map(d=>d.slice(0,7)))].sort();
+  const per=Object.entries(c.per).map(([pid,q])=>[+pid,q]).sort((a,b)=>(b[1].n+b[1].p)-(a[1].n+a[1].p));
+  const ords=D.orders.filter(o=>o.created.startsWith(ym)),byPr={};for(const o of ords){const k=PR(o.pr)?.n||'—';(byPr[k]||(byPr[k]={n:0,u:0,s:0}));byPr[k].n++;byPr[k].u+=o.units;byPr[k].s+=o.sum}
+  const tex=kind('tex').map(u=>[u,earn(u.id,ym)]).filter(x=>x[1].sum||x[1].paid);
+  const exps={};for(const d of ds)for(const [t,s] of D.days[d].exp)exps[t]=(exps[t]||0)+s;
+  return R(`<div class="hd"><div class="m">Hisobot</div><h1>${esc(monName(ym))}</h1></div><div class="bd">
+  ${L('Oy',I('month','','month','data-rr="1"'))}
+  ${sumCard(c,`Oy jami · ${c.days} kun`)}
+  <div class="sec"><b>Kunlar bo'yicha</b></div>
+  ${ds.length?table(['Kun','Naqd','Plastik','Avans','Xarajat','Bank','Foyda'],ds.map(d=>{const q=calc([d]);return [`<a href="#" data-act="openday" data-k="${d}">${+d.slice(8)}</a>`,fmt(q.N),fmt(q.P),fmt(q.A),fmt(q.X),fmt(q.B),`<span class="${q.foida<0?'neg':''}">${fmt(q.foida)}</span>`]}),['Jami',fmt(c.N),fmt(c.P),fmt(c.A),fmt(c.X),fmt(c.B),fmt(c.foida)]):'<div class="c sub">Bu oyda kassa yozuvi yo\'q</div>'}
+  ${per.length?`<div class="sec"><b>Shaxslar bo'yicha (topshirdi)</b></div>${table(['Ism','Naqd','Plastik','Ulush','Avans','Olinmagan'],per.map(([pid,q])=>[esc(pname(pid)),fmt(q.n),fmt(q.p),fmt(q.pl),fmt(q.a),`<span class="${q.pl-q.a<0?'neg':''}">${fmt(q.pl-q.a)}</span>`]))}`:''}
+  ${Object.keys(exps).length?`<div class="sec"><b>Xarajatlar</b></div>${table(['Nimaga','Summa'],Object.entries(exps).sort((a,b)=>b[1]-a[1]).map(([t,s])=>[esc(t),fmt(s)]),['Jami',fmt(c.X)])}`:''}
+  ${ords.length?`<div class="sec"><b>Naryadlar (ish turi)</b></div>${table(['Ish turi','Soni','Birlik','Summa'],Object.entries(byPr).map(([k,q])=>[esc(k),q.n,q.u,fmt(q.s)]))}`:''}
+  ${tex.length?`<div class="sec"><b>Xodimlar ishbay haqi</b></div>${table(['Xodim','Kasb','Hisoblandi','Berildi'],tex.map(([u,e])=>[esc(u.n),esc(PSH[u.prof]),fmt(e.sum),fmt(e.paid)]))}`:''}
+  ${months.length>1?`<div class="sec"><b>${y} yil oylari</b></div>${table(['Oy','Naqd','Plastik','Xarajat','Foyda'],months.map(m=>{const q=calc(monthDates(m));return [`<a href="#" data-act="openmonth" data-k="${m}">${MON[+m.slice(5)-1]}</a>`,fmt(q.N),fmt(q.P),fmt(q.X),fmt(q.foida)]}))}`:''}
+  </div>${nav()}`)},
+
+/* ---------- Zakazchilar ---------- */
+clients:()=>{const q=(S.draft.cq||'').toLowerCase(),list=kind('zak').filter(z=>z.n.toLowerCase().includes(q)).map(z=>[z,debt(z.id),D.orders.some(o=>o.zak===z.id)]).sort((a,b)=>b[1]-a[1]);
+  return R(`${S.role==='adm'?back('more'):''}<div class="hd ${S.role==='adm'?'t':''}"><h1>Zakazchilar</h1><div class="m">Shifokorlar, klinikalar va qarzlar</div></div><div class="bd">
+  <input class="i" type="search" data-f="cq" id="cq" placeholder="Qidirish" value="${v('cq')}" aria-label="Zakazchi qidirish">
+  <div class="list">${list.map(([z,db,has])=>`<a href="#" class="li" data-go="client" data-id="${z.id}"><span>${esc(z.n)}<div class="sub">${esc(z.sub||'')}${z.pct?` · ulush ${Math.round(z.pct*100)}%`:''}${z.imported?' · Excel':''}</div></span><span class="${has&&db>0?'neg':'sub'}" style="font-weight:700">${has?(db>0?som(db):'Qarz yo\'q'):som(ix().by[z.id]||0)}</span></a>`).join('')||'<div class="li sub">Topilmadi</div>'}</div></div>
+  <div class="ft" style="padding-bottom:10px"><button class="b" data-go="addclient">+ Zakazchi qo'shish</button></div>${nav()}`)},
+
+client:()=>{const z=P(S.pid);if(!z)return SC.clients();const os=D.orders.filter(o=>o.zak===z.id),b=billed(z.id),p=ix().by[z.id]||0;
+  return R(`${back('clients')}<div class="hd t"><div class="m">${esc(z.sub||'Zakazchi')}${z.city?' · '+esc(z.city):''}</div><h1>${esc(z.n)}</h1></div><div class="bd">
+  <div class="grid2"><div class="kpi"><div class="m">Hisoblangan</div><b>${som(b)}</b></div><div class="kpi"><div class="m">Jami topshirgan</div><b>${som(p)}</b></div></div>
+  ${os.length?`<div class="c row"><span class="m">${b-p>=0?'Qarz':"Ortiqcha to'lov"}</span><b class="${b-p>0?'neg':''}">${som(Math.abs(b-p))}</b></div>`:''}
+  <div class="c col" style="gap:0">${kv('Telefon',esc(z.phone||'—'))}${kv('Chegirma',(z.disc||0)+'%')}${kv('Ulush (plan)',`naqd ${Math.round((z.pct||0)*100)}% · plastik ${Math.round((z.pp??z.pct??0)*100)}%`)}</div>
+  ${S.role==='adm'?`<div class="fl">${L('Chegirma %',I('c_disc',String(z.disc||0),'number','min="0" max="100"'))}${L('Ulush %',I('c_pct',String(Math.round((z.pct||0)*100)),'number','min="0" max="100"'))}</div><button class="b o" data-act="csave">Saqlash</button>`:''}
+  ${os.length?`<div class="sec"><b>Naryadlar</b></div>${os.map(o=>ocard(o)).join('')}`:''}</div>
+  <div class="ft"><button class="b" data-act="payclient">To'lov qabul qilish</button></div>`)},
+
+addclient:()=>R(`${back('clients')}<div class="hd t"><h1>Yangi zakazchi</h1></div><div class="bd">${L('Nomi',I('z_name','Dr. Ism yoki klinika'))}${L('Turi',SEL('z_sub',[['Shifokor','Shifokor'],['Klinika','Klinika'],['Texnik','Zubtexnik']]))}${L('Telefon',I('z_phone','+998','tel'))}${L('Shahar',I('z_city','Shahar'))}<div class="fl">${L('Chegirma %',I('z_disc','0','number','min="0" max="100"'))}${L('Ulush % (klinika rejimi)',I('z_pct','0','number','min="0" max="100"'))}</div><div class="sub">Ulush: kassaga topshirgan pulining necha foizi shu shaxsga tegishli (Excel'dagi «Plan» kabi). Laboratoriya zakazchisi uchun 0.</div></div><div class="ft"><button class="b" data-act="addclient">Qo'shish</button></div>`),
+
+/* ---------- Xodimlar ---------- */
+staff:()=>{const f=S.pf,all=D.people.filter(x=>x.kind==='tex'||x.kind==='kas'),pend=all.filter(x=>x.st==='pending');
+  const list=all.filter(x=>f==='all'||(f==='pending'?x.st==='pending':f==='kas'?x.kind==='kas':x.prof===f));
+  const profs=Object.keys(PROF).filter(p=>all.some(x=>x.prof===p));
+  return R(`<div class="hd"><div class="m">Rahbar</div><h1>Xodimlar</h1></div><div class="bd">
+  <div class="chips">${[['all','Hammasi'],...(pend.length?[['pending',`Arizalar · ${pend.length}`]]:[]),...profs.map(p=>[p,PSH[p]]),['kas','Kassir']].map(([k,t])=>`<button class="chip ${f===k?'on':''}" data-act="pf" data-k="${k}">${esc(t)}</button>`).join('')}</div>
+  <div class="list">${list.map(u=>`<a href="#" class="li" data-go="person" data-id="${u.id}"><span>${esc(u.n)}<div class="sub">${u.kind==='kas'?'Kassir':esc(PROF[u.prof]||'')}${u.exp?' · '+esc(u.exp)+' yil':''}</div></span><span>${ubadge(u)} ›</span></a>`).join('')||'<div class="li sub">Topilmadi</div>'}</div></div>
+  <div class="ft" style="padding-bottom:10px"><button class="b" data-go="addstaff">+ Xodim qo'shish</button></div>${nav()}`)},
+
+person:()=>{const u=P(S.pid);if(!u)return SC.staff();if(u.kind==='zak'){S.screen='client';return SC.client()}
+  const ym=S.month,e=u.kind==='tex'?earn(u.id,ym):null;
+  return R(`${back('staff')}<div class="hd t"><div class="m">${u.kind==='kas'?'Kassir':esc(PROF[u.prof]||'')}</div><h1>${esc(u.n)}</h1></div><div class="bd">
+  <div class="c col" style="gap:0">${kv('Holat',`<span class="s ${USTAT[u.st||'ok'][1]}">${USTAT[u.st||'ok'][0]}</span>`)}${kv('Telefon',esc(u.phone||'—'))}${u.exp?kv('Tajriba',esc(u.exp)+' yil'):''}${u.exo?kv('Exocad',esc(u.exo)):''}</div>
+  ${u.st==='pending'||u.st==='rejected'?`<div class="sec"><b>Ariza</b></div><div class="fl">${['Rasm','Video','Rasm'].map(t=>`<div class="ph" style="height:72px;background:#E2D8EF;color:#3B2360">${t}</div>`).join('')}</div>${u.test?`<div class="c row"><div><b>TEST-01</b><div class="sub">${esc(u.test)}</div></div><button class="b o" style="width:auto;min-height:44px;padding:0 14px;font-size:14px" data-toast="Demo: fayl serverda saqlanmaydi">Yuklab olish</button></div>`:''}${L('Izoh yoki rad etish sababi',TA('ar_note',2))}`:''}
+  ${e?`${L('Oy',I('month','','month','data-rr="1"'))}<div class="grid2"><div class="kpi"><div class="m">Ishbay hisoblandi</div><b>${som(e.sum)}</b></div><div class="kpi"><div class="m">Berildi</div><b>${som(e.paid)}</b></div></div><div class="c row"><span class="m">Qoldiq</span><b class="${e.sum-e.paid<0?'neg':''}">${som(e.sum-e.paid)}</b></div>${e.rows.length?table(['Zakazchik','Birlik','Narx','Summa'],e.rows.map(r=>[esc(pname(r.zak)),r.units,fmt(r.rate),fmt(r.sum)])):''}`:''}
+  </div><div class="ft">${u.st==='pending'||u.st==='rejected'?`<button class="b" data-act="approve">Tasdiqlash</button><button class="b o" data-act="reject">Rad etish</button>`:`<button class="b" data-act="payadv">Avans / oylik berish</button><button class="b red" data-act="usr">${u.st==='blocked'?'Blokdan chiqarish':'Bloklash'}</button>`}</div>`)},
+
+addstaff:()=>R(`${back('staff')}<div class="hd t"><h1>Yangi xodim</h1></div><div class="bd">${L('Ism',I('s_name','Ism Familiya'))}${L('Kasb',SEL('s_prof',[...Object.entries(PROF),['kas','Kassir']]))}${L('Telefon',I('s_phone','+998','tel'))}${L('Tajriba (yil)',I('s_exp','0','number','min="0"'))}<div class="sub">Rahbar qo'shgan xodim darhol faol bo'ladi.</div></div><div class="ft"><button class="b" data-act="addstaff">Qo'shish</button></div>`),
+
+/* ---------- Ko'proq (rahbar) ---------- */
+more:()=>{const row=(t,x,go)=>`<a href="#" class="li" data-go="${go}"><span>${t}</span><span class="sub">${x} ›</span></a>`;
+  return R(`<div class="hd"><div class="m">Rahbar</div><h1>Ko'proq</h1></div><div class="bd">
+  <div class="list">${row('Zakazchilar',kind('zak').length,'clients')}${row('Prays-list va ishbay narxlar',D.price.length+' ish turi','price')}${row('Hisobotlar',monName(S.month),'rep')}${row('Baza: Excel import, zaxira',Object.keys(D.days).length+' kun','db')}</div>
+  <div class="list">${row('Til',"O'zbekcha",'lang')}${row('Sozlamalar','','set')}</div></div>${nav()}`)},
+
+price:()=>R(`${back('more')}<div class="hd t"><h1>Prays-list</h1><div class="m">Narx va har bir kasb uchun ishbay haqi</div></div><div class="bd">${D.price.map(p=>`<div class="c" data-go="pedit" data-id="${p.id}"><div class="row"><b>${esc(p.n)}</b><b>${som(p.price)}</b></div><div class="sub">1 ${esc(p.unit)} · ${p.st.map(([k,r])=>`${esc(PSH[k])} ${fmt(r)}`).join(' → ')}</div></div>`).join('')}</div><div class="ft"><button class="b" data-act="padd">+ Ish turi qo'shish</button></div>`),
+
+pedit:()=>{const p=PR(S.prid);if(!p)return SC.price();
+  return R(`${back('price')}<div class="hd t"><h1>Ish turi</h1></div><div class="bd">${L('Nomi',I('p_n',''))}<div class="fl">${L("Narx (so'm)",I('p_price','','number','min="0"'))}${L('Birlik',I('p_unit','birlik'))}</div>
+  <div class="sec"><b>Bosqichlar va ishbay haqi</b></div><div class="c">${p.st.map(([k],i)=>`<div class="fr" style="min-height:52px"><span style="flex:1">${i+1}. ${esc(PROF[k])}</span><input class="i" style="width:110px" type="number" min="0" data-f="p_r${i}" aria-label="${esc(PROF[k])} haqi" value="${v('p_r'+i)}"><button class="x" data-act="pdelst" data-i="${i}" aria-label="O'chirish">×</button></div>`).join('')||'<div class="sub">Bosqich yo\'q</div>'}</div>
+  <div class="fl">${SEL('p_add',Object.entries(PROF))}<button class="b o sm" style="flex:0 0 auto;padding:0 16px" data-act="paddst">+ Bosqich</button></div></div>
+  <div class="ft"><button class="b" data-act="psave">Saqlash</button>${D.orders.some(o=>o.pr===p.id)?'':'<button class="b red" data-act="pdel">O\'chirish</button>'}</div>`)},
+
+db:()=>{const days=Object.keys(D.days).sort(),imp=D.people.filter(x=>x.imported).length;
+  return R(`${back('more')}<div class="hd t"><h1>Baza</h1><div class="m">Import, eksport va zaxira nusxa</div></div><div class="bd">
+  <div class="grid2"><div class="kpi"><div class="m">Kassa kunlari</div><b>${days.length}</b></div><div class="kpi"><div class="m">Naryadlar</div><b>${D.orders.length}</b></div><div class="kpi"><div class="m">Odamlar</div><b>${D.people.length}</b></div><div class="kpi"><div class="m">Davr</div><b style="font-size:14px">${days.length?esc(days[0])+'<br>'+esc(days.at(-1)):'—'}</b></div></div>
+  <div class="c col"><b>Kassa Excel fayllaridan import</b><div class="sub">Oylik kassa jadvallari (.xlsx): har bir kunlik varaqdan kim topshirdi (naqd/plastik), Plan ulushi, avanslar, xarajatlar, bank va boshqa kirimlar olinadi. Fayllar kompyuterdan chiqmaydi.</div><button class="b" data-go="importx">Excel'dan import</button></div>
+  <div class="c col"><b>Zaxira nusxa</b><div class="sub">Butun bazani bitta .json faylga saqlang yoki undan tiklang.</div><div class="fl"><button class="b o sm" data-act="export">Yuklab olish</button><button class="b o sm" data-act="restore">Tiklash</button></div></div>
+  ${imp?`<div class="sub">Excel'dan kelgan shaxslar: ${imp}</div>`:''}
+  <button class="b red" data-act="reset">Demo bazani qayta tiklash</button></div>`)},
+
+importx:()=>{const r=S.imp;
+  return R(`${back('db')}<div class="hd t"><h1>Excel import</h1></div><div class="bd">
+  <button class="u" data-act="pickx">${r?.busy?'O\'qilmoqda…':'Oylik kassa fayllarini tanlang (.xlsx, bir nechta)'}</button>
+  ${r&&!r.busy?(r.err?`<div class="c neg">${esc(r.err)}</div>`:`<div class="c col" style="gap:0">${kv('Fayllar',r.files)}${kv("Kunlik varaqlar",r.sheets)}${kv('Kunlar',Object.keys(r.days).length)}${kv('Davr',Object.keys(r.days).sort().filter((_,i,a)=>i===0||i===a.length-1).map(esc).join(' — ')||'—')}${kv("O'tkazib yuborildi",r.skipped+' varaq')}</div>
+  <div class="sec"><b>Shaxslar va ulush (Plan)</b></div>${table(['Ism','Naqd %','Plastik %','Bazada'],r.people.map(p=>[esc(p.n),Math.round(p.pct*100),Math.round((p.pp??p.pct)*100),D.people.some(x=>x.n.toLowerCase()===p.n.toLowerCase())?'bor':'yangi']))}
+  <label class="chk"><input type="checkbox" data-f="imp_rep" ${S.draft.imp_rep!==false?'checked':''}>Mavjud kunlarni almashtirish</label>`):''}
+  <div class="sub">Summalar Excel'da ming so'mda yozilgan deb hisoblanadi va so'mga aylantiriladi. Takrorlangan sana bo'lsa, ma'lumoti ko'proq varaq olinadi.</div></div>
+  ${r&&!r.busy&&!r.err?`<div class="ft"><button class="b" data-act="impgo">Bazaga qo'shish</button></div>`:''}`)},
+
+/* ---------- Umumiy ---------- */
+set:()=>{const r=S.role,u=me()||{},row=(t,x,go)=>`<a href="#" class="li" data-go="${go}"><span>${t}</span><span class="sub">${x}</span></a>`;
+  return R(`${r==='adm'?back('more'):''}<div class="hd ${r==='adm'?'t':''}"><h1>Sozlamalar</h1></div><div class="bd"><div class="c" style="display:flex;align-items:center;gap:14px"><span class="av">${ini(u.n)}</span><div><b>${esc(u.n||'')}</b><div class="sub">${r==='tex'?esc(PROF[u.prof]||''):ROLE[r]}${r==='zak'&&u.sub?' · '+esc(u.sub):''}</div></div></div>
+  <div class="list">${row('Til',"O'zbekcha ›",'lang')}<label class="li">Bildirishnomalar<input type="checkbox" data-act="notif" ${D.notif?'checked':''} style="width:24px;height:24px;accent-color:var(--acc)"></label>${r==='kas'||r==='adm'?`<label class="li">Summalarni ming so'mda kiritish<input type="checkbox" data-act="kink" ${D.kInK?'checked':''} style="width:24px;height:24px;accent-color:var(--acc)"></label>`:''}${r==='zak'||r==='tex'?row(`Ma'lumotlarim`,'›','prof'):''}${r!=='adm'?row(`Rahbar bilan bog'lanish`,'›','contact'):''}</div>
+  ${r!=='adm'?`<a href="#" class="li c" data-act="switch" style="justify-content:center">Boshqa foydalanuvchi</a>`:''}
+  <a href="#" data-act="logout" class="c" style="display:flex;align-items:center;justify-content:center;min-height:52px;color:var(--red);font-weight:700;text-decoration:none">Chiqish</a></div>${nav()}`)},
+
+lang:()=>R(`${back(S.role==='adm'?'more':'set')}<div class="hd t"><div class="m">Sozlamalar</div><h1>Til / Язык / Language</h1></div><div class="bd"><div class="c">${[['uz',`O'zbekcha`],['ru','Русский'],['en','English']].map(([k,t])=>`<label class="chk"><input type="radio" name="lang" value="${k}" ${D.lang===k?'checked':''}>${t}</label>`).join('')}</div><div class="sec"><b>Rollar ranglari</b></div><div class="c">${Object.keys(ROLE).map(k=>`<div class="chk"><span style="width:24px;height:24px;border-radius:6px;background:${A[k]}"></span>${ROLE[k]}</div>`).join('')}</div></div><div class="ft"><button class="b" data-act="savelang">Saqlash</button></div>`),
+
+contact:()=>R(`${back('set')}<div class="hd t"><h1>Rahbar bilan bog'lanish</h1><div class="m">Savol yoki muammo bo'lsa yozing</div></div><div class="bd"><div class="c">${[['Telegram','@dentbridge_admin'],['Telefon',esc(D.lab.phone)],['Ish vaqti','09:00–18:00']].map(([a,b])=>`<div class="row" style="min-height:40px"><span class="m">${a}</span><b>${b}</b></div>`).join('')}</div>${L('Mavzu',SEL('c_topic',[['Naryad','Naryad haqida'],['Hisob',"To'lov va hisob"],['Boshqa','Boshqa']]))}${L('Xabar',TA('c_msg',4))}</div><div class="ft"><button class="b" data-act="contact">Yuborish</button></div>`)
 };
 
-function collect(){document.querySelectorAll('[data-f]').forEach(e=>S.draft[e.dataset.f]=e.type==='checkbox'?e.checked:e.value)}
-function render(){collect();$('#app').innerHTML=SC[S.screen]();
- document.querySelectorAll('select[data-f]').forEach(e=>{if(S.draft[e.dataset.f]!=null)e.value=S.draft[e.dataset.f]});
- const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight;}
-function go(s,id){collect();if(id!=null){if(s==='order')S.sel=+id;if(s==='adminreview')S.rev=+id}
- if(s==='prof')s=S.role==='lab'?'reglab':'regmod';
- if(s==='chat'){const o=ord();o.seen[S.role]=o.chat.length;save()}
- if(s==='reglab'&&D.lab)Object.assign(S.draft,{l_name:D.lab.name,l_person:D.lab.person,l_phone:D.lab.phone,l_city:D.lab.city});
- if(s==='regmod'&&D.mod)Object.assign(S.draft,{m_name:D.mod.name,m_phone:D.mod.phone,m_exo:D.mod.exo,m_exp:D.mod.exp});
- S.screen=s;render()}
-function toast(t){const e=document.createElement('div');e.className='tg';e.textContent=t;$('#app').appendChild(e);setTimeout(()=>e.remove(),2400)}
-const need=(k,t)=>{if(!String(S.draft[k]||'').trim()){toast(t);return false}return true};
-function upsert(u){const i=D.users.findIndex(x=>x.n===u.n&&x.r===u.r);if(i<0)D.users.push(u);else Object.assign(D.users[i],u)}
+/* ============ Render va navigatsiya ============ */
+function collect(){document.querySelectorAll('[data-f]').forEach(e=>{if(e.type==='radio')return;S.draft[e.dataset.f]=e.type==='checkbox'?e.checked:e.value})}
+function render(){S.ix=null;const m0=$('#msgs');
+  $('#app').innerHTML=(SC[S.screen]||SC.start)();
+  const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight;
+  const bd=$('.bd');if(bd&&S.keep!=null){bd.scrollTop=S.keep;S.keep=null}}
+function go(s,id){collect();
+  if(id!=null){if(['order'].includes(s))S.sel=+id;if(['person','client'].includes(s))S.pid=+id;if(s==='pedit')S.prid=+id}
+  if(s==='prof')s=S.role==='zak'?'regzak':'regtex';
+  if(s==='chat'){const o=ord();o.seen[S.role]=o.chat.length;save()}
+  if(s==='regzak'&&S.role==='zak'&&me())Object.assign(S.draft,{z_name:me().n,z_sub:me().sub,z_phone:me().phone,z_city:me().city});
+  if(s==='regtex'&&S.role==='tex'&&me())Object.assign(S.draft,{t_name:me().n,t_phone:me().phone,t_prof:me().prof,t_exo:me().exo,t_exp:me().exp});
+  if(s==='pedit'){const p=PR(S.prid);if(p){Object.assign(S.draft,{p_n:p.n,p_price:p.price,p_unit:p.unit});p.st.forEach(([,r],i)=>S.draft['p_r'+i]=r)}}
+  if(s==='client'&&P(S.pid)){const z=P(S.pid);S.draft.c_disc=z.disc||0;S.draft.c_pct=Math.round((z.pct||0)*100)}
+  if(s==='orders'||s==='jobs')S.flt=s==='jobs'?(['open','mine','done'].includes(S.flt)?S.flt:'open'):(['all','new','work','ready','del','late'].includes(S.flt)?S.flt:'all');
+  if(s==='staff'||s==='port')S.pf='all';
+  if(['kassa','rep','earn','person'].includes(s)){S.draft.kdate=S.kdate;S.draft.month=S.month}
+  if(s==='kform')['k_s','k_t','k_o'].forEach(k=>delete S.draft[k]);
+  S.screen=s;render()}
+function toast(t){const e=document.createElement('div');e.className='tg';e.setAttribute('role','status');e.textContent=t;$('#app').appendChild(e);setTimeout(()=>e.remove(),2600)}
+const need=(k,t)=>{if(!String(S.draft[k]??'').trim()){toast(t);return false}return true};
+function homeFor(r){if(r==='kas')return 'kassa';if(r==='tex'&&me()?.st!=='ok')return 'regwait';return 'home'}
+function download(name,text){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)}
+function loadXLSX(){return window.XLSX?Promise.resolve():new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';s.onload=ok;s.onerror=()=>no(new Error("Excel kutubxonasi yuklanmadi. Internetni tekshiring."));document.head.appendChild(s)})}
 
 document.addEventListener('click',e=>{
- const t=e.target.closest('[data-go],[data-act],[data-pick],[data-toast]');if(!t)return;
- if(t.dataset.toast)return toast(t.dataset.toast);
- if(t.dataset.pick){const f=$('#fp');f.dataset.k=t.dataset.pick;f.accept=t.dataset.acc||'';f.multiple=t.dataset.pick==='o'||t.dataset.pick==='m';
-  if(t.dataset.pick==='m'&&t.textContent==='Havola'){collect();S.link=true;return render()}
-  f.value='';return f.click()}
- if(t.dataset.go)return go(t.dataset.go,t.dataset.id);
- collect();const a=t.dataset.act,d=S.draft,o=S.sel?ord():null;
- if(a==='role'){S.role=t.dataset.k;
-  if(S.role==='lab')return go(D.lab?'home':'reglab');
-  if(S.role==='mod')return go(D.mod?(D.users.find(u=>u.n===D.mod.name)?.st==='ok'?'home':'regwait'):'regmod');
-  return go('admin')}
- if(a==='logout'){S.role=null;return go('start')}
- if(a==='reglab'){if(!need('l_name','Laboratoriya nomini kiriting')||!need('l_person',`Mas'ul shaxsni kiriting`))return;
-  D.lab={name:d.l_name.trim(),person:d.l_person.trim(),phone:d.l_phone||'',city:d.l_city||''};upsert({n:D.lab.name,r:'Lab',st:'ok'});save();return go('home')}
- if(a==='regmod'){if(!need('m_name','Ismni kiriting'))return;if(!need('m_exo','Exocad versiyasini kiriting'))return;return go('regtest')}
- if(a==='regtest'){if(!S.files.t?.[0])return toast('Avval .stl modelni yuklang');
-  D.mod={name:d.m_name.trim(),phone:d.m_phone||'',exo:d.m_exo,exp:d.m_exp||'0'};
-  upsert({n:D.mod.name,r:'Modeler',st:'pending',phone:D.mod.phone,exo:D.mod.exo,exp:D.mod.exp,w:[],test:S.files.t[0].n,note:''});save();return go('regwait')}
- if(a==='editmod')return go('regmod');
- if(a==='flt'){S.flt=t.dataset.k;return render()}
- if(a==='pf'){S.pf=t.dataset.k;return render()}
- if(a==='imp'){S.imp=+t.dataset.k;return render()}
- if(a==='take'){const x=D.orders.find(z=>z.id===+t.dataset.id);x.status='work';x.modeler=me();save();toast('Zakaz qabul qilindi');return go('order',x.id)}
- if(a==='create'){if(!need('o_teeth','Tish raqamlarini kiriting')||!need('o_due','Muddatni tanlang'))return;
-  const n={id:D.next++,type:d.o_type||'Toj',teeth:d.o_teeth.trim(),color:d.o_color||'—',due:d.o_due,note:(d.o_note||'').trim(),lab:D.lab.name,files:S.files.o||[],status:'new',chat:[],seen:{lab:0,mod:0,adm:0}};
-  D.orders.unshift(n);['o_teeth','o_color','o_due','o_note','o_type'].forEach(k=>delete d[k]);S.files.o=[];save();return go('orders')}
- if(a==='submit'){if(!S.files.w?.[0])return toast('Avval .stl modelni yuklang');o.mf=S.files.w[0].n;o.mn=(d.mn||'').trim();o.fix='';o.status='review';S.files.w=null;delete d.mn;save();toast('Tekshiruvga topshirildi');return go('orders')}
- if(a==='accept'){o.status='done';save();toast('Zakaz qabul qilindi');return go('orders')}
- if(a==='fix'){if(!need('fx','Tuzatish sababini yozing'))return;o.fix=d.fx.trim();o.status='work';delete d.fx;save();toast('Tuzatishga qaytarildi');return go('orders')}
- if(a==='send'){const x=(d.cm||'').trim();if(!x)return;o.chat.push({w:S.role,t:x});o.seen[S.role]=o.chat.length;d.cm='';save();return render()}
- if(a==='savelang'){const r=document.querySelector('input[name=lang]:checked');D.lang=r?r.value:'uz';save();toast(D.lang==='uz'?'Saqlandi':'Hozircha faqat oʻzbekcha interfeys mavjud');return go(S.role==='adm'?'admin':'set')}
- if(a==='contact'){if(!need('c_msg','Xabar yozing'))return;d.c_msg='';toast('Adminga yuborildi');return go('set')}
- if(a==='usr'){const u=D.users[+t.dataset.id];u.st=u.st==='ok'?'blocked':'ok';save();return render()}
- if(a==='approve'||a==='reject'){const u=D.users[S.rev];u.st=a==='approve'?'ok':'rejected';u.note=d.ar_note||'';d.ar_note='';save();toast(a==='approve'?'Tasdiqlandi':'Rad etildi');return go('admin')}
+  const t=e.target.closest('[data-go],[data-act],[data-pick],[data-toast]');if(!t)return;
+  if(t.tagName==='A')e.preventDefault();
+  if(t.dataset.toast)return toast(t.dataset.toast);
+  if(t.dataset.pick){const f=$('#fp');f.dataset.k=t.dataset.pick;f.accept=t.dataset.acc||'';f.multiple=['o','t'].includes(t.dataset.pick);
+    if(t.dataset.pick==='t'&&t.textContent==='Havola'){collect();S.link=true;return render()}
+    f.value='';return f.click()}
+  if(t.dataset.go)return go(t.dataset.go,t.dataset.id);
+  if(t.type==='checkbox')return;
+  collect();const a=t.dataset.act,d=S.draft,o=S.sel?ord():null,u=me();
+  switch(a){
+  case 'role':S.role=t.dataset.k;if(S.role==='adm')return go('home');
+    if(D.me[S.role]&&P(D.me[S.role])&&P(D.me[S.role]).st!=='blocked')return go(homeFor(S.role));return go('who');
+  case 'pick':{const p=P(+t.dataset.id);if(p.st==='blocked')return toast('Akkaunt bloklangan');D.me[S.role]=p.id;save();return go(homeFor(S.role))}
+  case 'logout':S.role=null;return go('start');
+  case 'switch':delete D.me[S.role];save();return go('who');
+  case 'regzak':{if(!need('z_name','Ismni kiriting'))return;const x={kind:'zak',n:d.z_name.trim(),sub:d.z_sub||'Shifokor',phone:d.z_phone||'',city:d.z_city||'',pct:0,disc:0,st:'ok'};
+    if(S.role==='zak'&&me())Object.assign(me(),x);else{x.id=newId();D.people.push(x);D.me.zak=x.id}save();toast('Saqlandi');return go('home')}
+  case 'regtex':{if(!need('t_name','Ismni kiriting'))return;if(d.t_prof==='cad'&&!need('t_exo','Exocad versiyasini kiriting'))return;
+    if(d.t_prof==='cad')return go('regtest');return saveTex()}
+  case 'regtest':if(!S.files.ts?.[0])return toast('Avval .stl modelni yuklang');return saveTex(S.files.ts[0].n);
+  case 'edittex':return go('regtex');
+  case 'flt':S.flt=t.dataset.k;return render();
+  case 'pf':S.pf=t.dataset.k;return render();
+  case 'create':{if(!need('o_teeth','Tish raqamlarini kiriting')||!need('o_due','Muddatni tanlang'))return;
+    if(d.o_due<today())return toast("Muddat o'tib ketgan sana bo'lmasin");
+    const pr=PR(+(d.o_pr||D.price[0].id)),zak=S.role==='zak'?u.id:+(d.o_zak||kind('zak')[0].id),units=Math.max(1,Math.round(num(d.o_units)||teethCount(d.o_teeth)||1));
+    const n={id:D.next++,zak,pr:pr.id,patient:(d.o_pat||'').trim(),teeth:d.o_teeth.trim(),units,color:(d.o_color||'').trim(),due:d.o_due,note:(d.o_note||'').trim(),files:S.files.o||[],created:today(),del:false,
+      sum:Math.round(units*pr.price*(1-(P(zak)?.disc||0)/100)),stages:pr.st.map(([p,rate])=>({p,rate,s:null,st:'wait',at:null})),chat:[],seen:{}};
+    D.orders.unshift(n);['o_teeth','o_color','o_due','o_note','o_pat','o_units'].forEach(k=>delete d[k]);S.files.o=[];save();toast('Naryad yuborildi');return go('order',n.id)}
+  case 'take':{const s=o.stages[+t.dataset.i];if(!avail(o,+t.dataset.i))return toast("Bu bosqich endi bo'sh emas");s.s=u.id;s.st='work';save();toast('Bosqich qabul qilindi');return render()}
+  case 'sdone':{const s=o.stages[+t.dataset.i];if(u.prof==='cad'&&!S.files.w?.[0]&&!s.file)return toast('Avval .stl modelni yuklang');
+    s.st='done';s.at=today();s.fix='';if(S.files.w?.[0])s.file=S.files.w[0].n;if((d.mn||'').trim())o.chat.push({w:'tex',n:u.n,t:`${PSH[s.p]} tayyor: ${d.mn.trim()}`});
+    S.files.w=null;delete d.mn;save();toast('Bosqich topshirildi');return go('jobs')}
+  case 'sback':{const s=o.stages[+t.dataset.i],why=prompt('Qaytarish sababi');if(why===null)return;s.st='work';s.fix=why||'Tuzatish kerak';s.at=null;
+    o.stages.slice(+t.dataset.i+1).forEach(x=>{if(x.st==='done'){x.st='wait';x.s=null;x.at=null}});save();toast('Bosqich qaytarildi');return render()}
+  case 'accept':o.del=true;o.delAt=today();save();toast('Naryad qabul qilindi');return go('orders');
+  case 'deliver':o.del=true;o.delAt=today();save();toast('Topshirildi deb belgilandi');return render();
+  case 'fix':{if(!need('fx','Tuzatish sababini yozing'))return;const i=o.stages.length-1,s=o.stages[i];s.st='work';s.fix=d.fx.trim();s.at=null;o.chat.push({w:'zak',n:u.n,t:'Tuzatish: '+d.fx.trim()});delete d.fx;save();toast('Tuzatishga qaytarildi');return go('orders')}
+  case 'send':{const x=(d.cm||'').trim();if(!x)return;o.chat.push({w:S.role,n:u?.n,t:x});o.seen[S.role]=o.chat.length;d.cm='';save();return render()}
+  case 'payorder':S.kt='in';S.kdate=today();go('kform');S.draft.k_p=String(o.zak);S.draft.k_o=String(o.id);S.draft.k_s=String((o.sum-(ix().byOrd[o.id]||0))/(D.kInK?1000:1));return render();
+  case 'payclient':S.kt='in';S.kdate=today();go('kform');S.draft.k_p=String(S.pid);return render();
+  case 'payadv':S.kt='adv';S.kdate=today();go('kform');S.draft.k_p=String(S.pid);return render();
+  case 'kday':S.kdate=addDays(S.kdate,+t.dataset.k);S.draft.kdate=S.kdate;return render();
+  case 'kadd':S.kt=t.dataset.k;return go('kform');
+  case 'kdel':{if(!confirm("Yozuvni o'chirasizmi?"))return;const x=day(S.kdate);if(t.dataset.k==='bank')x.bank=0;else x[t.dataset.k].splice(+t.dataset.i,1);save();S.keep=$('.bd')?.scrollTop;return render()}
+  case 'ksave':{const k=S.kt,s=amount('k_s');if(s<=0)return toast('Summani kiriting');const x=day(S.kdate);
+    if(k==='in'){const pid=+d.k_p;if(!pid)return toast('Kim topshirganini tanlang');x.in.push(d.k_o?[pid,d.k_m||'n',s,+d.k_o]:[pid,d.k_m||'n',s])}
+    if(k==='adv'){if(!+d.k_p)return toast('Kimga berilganini tanlang');x.adv.push([+d.k_p,s])}
+    if(k==='exp'){if(!need('k_t','Nimaga sarflanganini yozing'))return;x.exp.push([d.k_t.trim(),s])}
+    if(k==='oth'){x.oth.push([(d.k_t||'Boshqa kirim').trim(),d.k_m||'n',s])}
+    if(k==='bank')x.bank=s;
+    save();toast('Kassaga yozildi');return go('kassa')}
+  case 'openday':S.kdate=t.dataset.k;return go('kassa');
+  case 'openmonth':S.month=t.dataset.k;S.draft.month=S.month;return render();
+  case 'csave':{const z=P(S.pid);z.disc=Math.min(100,Math.max(0,num(d.c_disc)));z.pct=z.pp=Math.min(1,Math.max(0,num(d.c_pct)/100));save();toast('Saqlandi');return render()}
+  case 'addclient':{if(!need('z_name','Nomini kiriting'))return;const pct=Math.min(1,Math.max(0,num(d.z_pct)/100));
+    const z={id:newId(),kind:'zak',n:d.z_name.trim(),sub:d.z_sub||'Shifokor',phone:d.z_phone||'',city:d.z_city||'',disc:Math.min(100,Math.max(0,num(d.z_disc))),pct,pp:pct,st:'ok'};
+    D.people.push(z);['z_name','z_phone','z_city','z_disc','z_pct'].forEach(k=>delete d[k]);save();toast("Qo'shildi");return go('client',z.id)}
+  case 'addstaff':{if(!need('s_name','Ismni kiriting'))return;const k=d.s_prof||'gips';
+    const x={id:newId(),kind:k==='kas'?'kas':'tex',prof:k==='kas'?undefined:k,n:d.s_name.trim(),phone:d.s_phone||'',exp:d.s_exp||'',st:'ok'};
+    D.people.push(x);['s_name','s_phone','s_exp'].forEach(k=>delete d[k]);save();toast("Xodim qo'shildi");return go('person',x.id)}
+  case 'usr':{const x=P(S.pid);x.st=x.st==='blocked'?'ok':'blocked';save();return render()}
+  case 'approve':case 'reject':{const x=P(S.pid);x.st=a==='approve'?'ok':'rejected';x.note=d.ar_note||'';d.ar_note='';save();toast(a==='approve'?'Tasdiqlandi':'Rad etildi');return go('staff')}
+  case 'padd':{const id=Math.max(0,...D.price.map(p=>p.id))+1;D.price.push({id,n:'Yangi ish turi',unit:'birlik',price:0,st:[['gips',0]]});save();return go('pedit',id)}
+  case 'paddst':{const p=PR(S.prid);p.st.push([d.p_add||'gips',0]);S.draft['p_r'+(p.st.length-1)]=0;return render()}
+  case 'pdelst':{const p=PR(S.prid),i=+t.dataset.i;p.st.forEach((s,k)=>s[1]=num(d['p_r'+k]));p.st.splice(i,1);p.st.forEach((s,k)=>d['p_r'+k]=s[1]);delete d['p_r'+p.st.length];return render()}
+  case 'psave':{const p=PR(S.prid);if(!need('p_n','Nomini kiriting'))return;if(!p.st.length)return toast("Kamida bitta bosqich qo'shing");
+    p.n=d.p_n.trim();p.price=Math.max(0,Math.round(num(d.p_price)));p.unit=(d.p_unit||'birlik').trim();p.st.forEach((s,k)=>s[1]=Math.max(0,Math.round(num(d['p_r'+k]))));save();toast('Saqlandi');return go('price')}
+  case 'pdel':if(!confirm("Ish turini o'chirasizmi?"))return;D.price=D.price.filter(p=>p.id!==S.prid);save();return go('price');
+  case 'export':download(`dentbridge-baza-${today()}.json`,JSON.stringify(D));return toast('Zaxira fayl yuklab olindi');
+  case 'restore':{const f=$('#fj');f.value='';return f.click()}
+  case 'reset':if(!confirm("Barcha ma'lumot o'chib, demo baza tiklanadi. Davom etasizmi?"))return;D=seed();save();S.role='adm';toast('Demo baza tiklandi');return go('db');
+  case 'pickx':{if(S.imp?.busy)return;const f=$('#fx');f.value='';return f.click()}
+  case 'impgo':return importMerge();
+  case 'savelang':{const x=document.querySelector('input[name=lang]:checked');D.lang=x?x.value:'uz';save();toast(D.lang==='uz'?'Saqlandi':'Hozircha faqat oʻzbekcha interfeys mavjud');return go(S.role==='adm'?'more':'set')}
+  case 'contact':if(!need('c_msg','Xabar yozing'))return;d.c_msg='';toast('Yuborildi');return go('set');
+  }
 });
-document.addEventListener('change',e=>{
- if(e.target.id==='fp'){const k=e.target.dataset.k,fs=[...e.target.files].map(f=>({n:f.name,s:f.size}));if(!fs.length)return;
-  collect();
-  if(k==='c'){const o=ord();o.chat.push({w:S.role,t:'Fayl: '+fs[0].n});o.seen[S.role]=o.chat.length;save()}
-  else if(k==='o'||k==='m')S.files[k]=[...(S.files[k]||[]),...fs];else S.files[k]=fs;
-  return render()}
- if(e.target.dataset.act==='notif'){D.notif=e.target.checked;save()}
+function saveTex(test){const d=S.draft,prof=d.t_prof||'gips';
+  const x={kind:'tex',n:d.t_name.trim(),phone:d.t_phone||'',prof,exo:prof==='cad'?d.t_exo:undefined,exp:d.t_exp||'0',st:'pending',test:test||undefined,note:''};
+  if(me())Object.assign(me(),x);else{x.id=newId();D.people.push(x);D.me.tex=x.id}
+  save();toast('Ariza yuborildi');return go('regwait')}
+async function readX(fs){
+  S.imp={busy:true};render();
+  try{await loadXLSX();let acc;
+    for(const f of fs){const buf=await f.arrayBuffer();const wb=XLSX.read(buf,{type:'array',cellFormula:true,cellStyles:false,cellHTML:false});acc=KassaImport.parseWorkbook(wb,acc)}
+    const r=KassaImport.finish(acc);r.files=fs.length;
+    if(!Object.keys(r.days).length)r.err="Kunlik kassa varaqlari topilmadi. Varaq nomlari «2026 Avgust (4)» ko'rinishida bo'lishi kerak.";
+    S.imp=r;
+  }catch(err){S.imp={err:err.message||String(err)}}
+  if(S.screen==='importx')render();
+}
+function importMerge(){const r=S.imp,rep=S.draft.imp_rep!==false,map={};
+  for(const p of r.people){let x=D.people.find(y=>y.n.toLowerCase()===p.n.toLowerCase());
+    if(!x){x={id:newId(),kind:'zak',sub:'Shifokor',n:p.n,phone:'',city:'',disc:0,pct:p.pct,pp:p.pp??p.pct,st:'ok',imported:true};D.people.push(x)}
+    else if(x.kind==='zak'){x.pct=p.pct;x.pp=p.pp??p.pct}
+    map[p.n]=x.id}
+  const idOf=n=>map[n]||(map[n]=(()=>{const x={id:newId(),kind:'zak',sub:'Shifokor',n,pct:0.5,pp:0.5,st:'ok',imported:true};D.people.push(x);return x.id})());
+  let added=0,kept=0;
+  for(const [date,x] of Object.entries(r.days)){
+    if(D.days[date]&&!rep){kept++;continue}
+    D.days[date]={in:x.in.map(([n,m,s])=>[idOf(n),m,s]),adv:x.adv.map(([n,s])=>[idOf(n),s]),exp:x.exp.slice(),bank:x.bank||0,oth:x.oth.slice()};added++}
+  if(!save())return;
+  const last=Object.keys(r.days).sort().at(-1);if(last){S.month=last.slice(0,7);S.kdate=last}
+  S.imp=null;toast(`${added} kun qo'shildi${kept?`, ${kept} kun saqlab qolindi`:''}`);return go('rep');
+}
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.id==='fp'){const k=t.dataset.k,fs=[...t.files].map(f=>({n:f.name,s:f.size}));if(!fs.length)return;collect();
+    if(k==='c'){const o=ord();o.chat.push({w:S.role,n:me()?.n,t:'Fayl: '+fs[0].n});o.seen[S.role]=o.chat.length;save()}
+    else if(k==='o'||k==='t')S.files[k]=[...(S.files[k]||[]),...fs];else S.files[k]=fs;
+    return render()}
+  if(t.id==='fx'){const fs=[...t.files];if(fs.length)readX(fs);return}
+  if(t.id==='fj'){const f=t.files[0];if(!f)return;f.text().then(txt=>{const x=JSON.parse(txt);if(!x||x.v!==3||!Array.isArray(x.people))throw new Error();
+      if(!confirm("Joriy baza zaxira fayl bilan almashtiriladi. Davom etasizmi?"))return;D=x;save();toast('Baza tiklandi');go('db')}).catch(()=>toast("Fayl DentBridge zaxirasi emas"));return}
+  if(t.dataset.act==='notif'){D.notif=t.checked;save();return}
+  if(t.dataset.act==='kink'){D.kInK=t.checked;save();return}
+  if(t.dataset.f==='kdate'&&t.value){S.kdate=t.value;collect();return render()}
+  if(t.dataset.f==='month'&&t.value){S.month=t.value;collect();return render()}
+  if(t.dataset.rr){collect();S.keep=$('.bd')?.scrollTop;render()}
 });
 document.addEventListener('input',e=>{
- if(e.target.id==='q'){S.draft.q=e.target.value;const g=S.gr(),rows=[];for(let i=0;i<g.length;i+=2)rows.push(tiles(g.slice(i,i+2),96));$('#grid').innerHTML=rows.join('')||'<div class="sub" style="text-align:center">Topilmadi</div>'}
+  if(e.target.id==='cq'){S.draft.cq=e.target.value;const pos=e.target.selectionStart;render();const q=$('#cq');q.focus();q.setSelectionRange(pos,pos)}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='cm'){e.preventDefault();document.querySelector('[data-act=send]').click()}});
 render();
